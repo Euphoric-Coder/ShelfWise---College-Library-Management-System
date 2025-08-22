@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import BookCard from "@/components/BookCard";
 
-const BookList = () => {
+const BookList = ({ title, books, containerClassName }) => {
+  if (books.length < 2) return;
+
   return (
-    <section className=''>
-        <h2 className='font-bebas-neue text-4xl text-light-100'>Popular books</h2>
-    </section>
-  )
-}
+    <section className={containerClassName}>
+      <h2 className="font-bebas-neue text-4xl text-light-100">{title}</h2>
 
-export default BookList
+      <ul className="book-list">
+        {books.map((book) => (
+          <BookCard key={book.title} id={book.id} title={book.title} genre={book.genre} coverColor={book.color} coverUrl={book.cover} />
+        ))}
+      </ul>
+    </section>
+  );
+};
+export default BookList;
