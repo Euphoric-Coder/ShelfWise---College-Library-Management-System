@@ -32,20 +32,11 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
     const result = await onSubmit(data);
 
     if (result.success) {
-      toast({
-        title: "Success",
-        description: isSignIn
-          ? "You have successfully signed in."
-          : "You have successfully signed up.",
-      });
+      toast.success(`You have successfully ${isSignIn ? "signed in" : "signed up"}.`);
 
       router.push("/");
     } else {
-      toast({
-        title: `Error ${isSignIn ? "signing in" : "signing up"}`,
-        description: result.error ?? "An error occurred.",
-        variant: "destructive",
-      });
+      toast.error(result.error ?? "An error occurred.");
     }
   };
 

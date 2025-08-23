@@ -15,7 +15,7 @@ const {
 
 const authenticator = async () => {
   try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
+    const response = await fetch(`${config.env.apiEndpoint}/api/imagekit`);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -59,42 +59,25 @@ const FileUpload = ({
 
   const onError = (error) => {
     console.log(error);
-
-    toast({
-      title: `${type} upload failed`,
-      description: `Your ${type} could not be uploaded. Please try again.`,
-      variant: "destructive",
-    });
+    toast.error(`Failed to upload ${type}. Please try again.`);
   };
 
   const onSuccess = (res) => {
     setFile(res);
     onFileChange(res.filePath);
-
-    toast({
-      title: `${type} uploaded successfully`,
-      description: `${res.filePath} uploaded successfully!`,
-    });
+    toast.success(`Successfully uploaded ${type}.`);
   };
 
   const onValidate = (file) => {
     if (type === "image") {
       if (file.size > 20 * 1024 * 1024) {
-        toast({
-          title: "File size too large",
-          description: "Please upload a file that is less than 20MB in size",
-          variant: "destructive",
-        });
+        toast.error("Please upload a file that is less than 20MB in size");
 
         return false;
       }
     } else if (type === "video") {
       if (file.size > 50 * 1024 * 1024) {
-        toast({
-          title: "File size too large",
-          description: "Please upload a file that is less than 50MB in size",
-          variant: "destructive",
-        });
+        toast.error("Please upload a file that is less than 50MB in size");
         return false;
       }
     }
@@ -145,10 +128,6 @@ const FileUpload = ({
         />
 
         <p className={cn("text-base", styles.placeholder)}>{placeholder}</p>
-
-        {file && (
-          <p className={cn("upload-filename", styles.text)}>{file.filePath}</p>
-        )}
       </button>
 
       {progress > 0 && progress !== 100 && (
