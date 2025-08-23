@@ -19,14 +19,12 @@ const authenticator = async () => {
 
     if (!response.ok) {
       const errorText = await response.text();
-
       throw new Error(
-        `Request failed with status ${response.status}: ${errorText}`,
+        `Request failed with status ${response.status}: ${errorText}`
       );
     }
 
     const data = await response.json();
-
     const { signature, expire, token } = data;
 
     return { token, expire, signature };
@@ -42,11 +40,11 @@ const FileUpload = ({
   folder,
   variant,
   onFileChange,
-  value,
 }) => {
   const ikUploadRef = useRef(null);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const styles = {
     button:
@@ -69,20 +67,52 @@ const FileUpload = ({
   };
 
   const onValidate = (file) => {
-    if (type === "image") {
-      if (file.size > 20 * 1024 * 1024) {
-        toast.error("Please upload a file that is less than 20MB in size");
+    if (type === "image" && file.size > 20 * 1024 * 1024) {
+      toast.error("Please upload a file that is less than 20MB in size");
+      return false;
+    }
+    if (type === "video" && file.size > 50 * 1024 * 1024) {
+      toast.error("Please upload a file that is less than 50MB in size");
+      return false;
+    }
+    return true;
+  };
 
-        return false;
-      }
-    } else if (type === "video") {
-      if (file.size > 50 * 1024 * 1024) {
-        toast.error("Please upload a file that is less than 50MB in size");
-        return false;
+  const handleReupload = async (e) => {
+    e.preventDefault();
+
+    if (file?.fileId) {
+      try {
+        setIsDeleting(true);
+        const res = await fetch(
+          `${config.env.apiEndpoint}/api/imagekit/delete`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fileId: file.fileId }),
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error(`Delete failed with status ${res.status}`);
+        }
+
+        toast.success("Previous file deleted.");
+        setFile(null);
+        setProgress(0);
+      } catch (error) {
+        console.error("Delete failed", error);
+        toast.error("Failed to delete previous file. Try again.");
+        return;
+      } finally {
+        setIsDeleting(false);
       }
     }
 
-    return true;
+    // Open upload dialog
+    if (ikUploadRef.current) {
+      ikUploadRef.current?.click();
+    }
   };
 
   return (
@@ -100,7 +130,6 @@ const FileUpload = ({
         onUploadStart={() => setProgress(0)}
         onUploadProgress={({ loaded, total }) => {
           const percent = Math.round((loaded / total) * 100);
-
           setProgress(percent);
         }}
         folder={folder}
@@ -110,14 +139,17 @@ const FileUpload = ({
 
       <button
         className={cn("upload-btn", styles.button)}
-        onClick={(e) => {
-          e.preventDefault();
-
-          if (ikUploadRef.current) {
-            // @ts-ignore
-            ikUploadRef.current?.click();
-          }
-        }}
+        onClick={
+          file
+            ? handleReupload
+            : (e) => {
+                e.preventDefault();
+                if (ikUploadRef.current) {
+                  ikUploadRef.current?.click();
+                }
+              }
+        }
+        disabled={isDeleting}
       >
         <Image
           src="/icons/upload.svg"
@@ -126,12 +158,13 @@ const FileUpload = ({
           height={20}
           className="object-contain"
         />
-
-        <p className={cn("text-base", styles.placeholder)}>{placeholder}</p>
+        <p className={cn("text-base", styles.placeholder)}>
+          {isDeleting ? "Deleting..." : file ? "Reupload" : placeholder}
+        </p>
       </button>
 
       {progress > 0 && progress !== 100 && (
-        <div className="w-full rounded-full bg-green-200">
+        <div className="w-full rounded-full bg-green-200 mt-2">
           <div className="progress" style={{ width: `${progress}%` }}>
             {progress}%
           </div>
