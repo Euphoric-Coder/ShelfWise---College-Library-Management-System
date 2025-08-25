@@ -2,7 +2,7 @@
 
 import Sidebar from "@/components/Admin/Sidebar";
 import React, { useState } from "react";
-import "@/app/admin/admin.css";
+import "@/styles/admin.css"
 
 const layout = ({ children }) => {
   const [currentPage, setCurrentPage] = useState("home");

@@ -1,0 +1,566 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .admin-container {
+    @apply flex w-full lg:w-[calc(100%-264px)] flex-1 flex-col bg-light-300 p-3 sm:p-5 lg:p-10;
+  }
+
+  .back-btn {
+    @apply mb-10 w-fit border border-light-300 bg-white text-xs font-medium text-dark-200 hover:bg-light-300 !important;
+  }
+
+  /* Confirmation Dialog */
+  .confirm-trigger {
+    @apply font-semibold text-sm shadow-none hover:bg-opacity-70 w-full !important;
+  }
+
+  .confirm-approve {
+    @apply bg-green-100 text-green-800 hover:bg-green-100/70 !important;
+  }
+
+  .confirm-reject {
+    @apply bg-red-100 text-red-800 hover:bg-red-100/70 !important;
+  }
+
+  .confirm-content {
+    @apply sm:max-w-md flex flex-col items-center justify-center p-6 !important;
+  }
+
+  .confirm-illustration {
+    @apply size-28 rounded-full flex justify-center items-center mx-auto;
+  }
+
+  .confirm-illustration div:first-child {
+    @apply size-[70%] rounded-full flex justify-center items-center;
+  }
+
+  .confirm-btn {
+    @apply w-full min-h-14 rounded-xl font-bold text-base text-light-800 !important;
+  }
+
+  /* Book Form */
+  .book-form_input {
+    @apply min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500 !important;
+  }
+
+  .book-form_btn {
+    @apply min-h-14 w-full bg-primary-admin hover:bg-primary-admin/95 !important;
+  }
+
+  /* Home Page */
+  .view-btn {
+    @apply bg-light-300 rounded-md text-primary-admin font-semibold hover:bg-light-300/80 shadow-none !important;
+  }
+
+  .add-new-book_btn {
+    @apply mt-7 mb-3 bg-light-300 py-4 px-3 flex flex-row items-center rounded-xl gap-4;
+  }
+
+  .add-new-book_btn div:first-child {
+    @apply size-12 bg-white rounded-full flex justify-center items-center;
+  }
+
+  .add-new-book_btn p:first-child {
+    @apply font-semibold text-lg text-dark-400;
+  }
+
+  /* Statistics */
+  .stat {
+    @apply bg-white rounded-xl p-4 sm:p-5 space-y-3 sm:space-y-5 flex-1;
+  }
+
+  .stat-info {
+    @apply flex justify-between items-center gap-5;
+  }
+
+  .stat-label {
+    @apply font-medium text-base text-light-500 whitespace-nowrap;
+  }
+
+  .stat-count {
+    @apply font-semibold text-2xl sm:text-3xl text-dark-400;
+  }
+
+  /* Book Stripe */
+  .book-stripe {
+    @apply flex flex-row gap-3 sm:gap-4 bg-white p-3 sm:p-4 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .book-stripe .title {
+    @apply font-semibold text-sm sm:text-base text-dark-400 line-clamp-1;
+  }
+
+  .book-stripe .author {
+    @apply flex flex-wrap flex-row items-center gap-2;
+  }
+
+  .book-stripe .author p:first-child {
+    @apply text-light-500 text-xs sm:text-sm line-clamp-1;
+  }
+
+  .book-stripe .author div {
+    @apply size-1 rounded-full bg-light-500;
+  }
+
+  .book-stripe .author p:last-child {
+    @apply text-light-500 text-xs sm:text-sm;
+  }
+
+  .book-stripe .user {
+    @apply mt-2.5 flex flex-row flex-wrap gap-3 sm:gap-5;
+  }
+
+  .book-stripe .user .avatar {
+    @apply flex flex-row items-center gap-1.5;
+  }
+
+  .book-stripe .user .avatar p {
+    @apply text-xs sm:text-sm text-dark-200;
+  }
+
+  .book-stripe .borrow-date {
+    @apply flex flex-row items-center gap-1.5;
+  }
+
+  .book-stripe .borrow-date p {
+    @apply text-xs sm:text-sm text-dark-200;
+  }
+
+  /* Borrow Requests Container */
+  .borrow-requests-container {
+    @apply bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-sm;
+  }
+
+  .borrow-requests-list {
+    @apply space-y-3;
+  }
+
+  /* Recently Added Books Container */
+  .recently-added-container {
+    @apply bg-white rounded-xl p-4 sm:p-6 border border-gray-100 shadow-sm;
+  }
+
+  .book-item {
+    @apply flex items-center gap-2 sm:gap-3 py-2 sm:py-3 px-2 rounded-lg hover:bg-light-300 transition-colors duration-200;
+  }
+
+  /* Color Picker */
+  .color-picker {
+    @apply flex min-h-14 flex-row items-center gap-3 rounded-md border border-gray-100 bg-light-600 p-4 text-base font-semibold text-dark-400;
+  }
+
+  .hex-input {
+    @apply h-full flex-1 bg-transparent font-ibm-plex-sans outline-none;
+  }
+
+  .hex-color-picker {
+    @apply absolute left-0 top-full z-50 mt-3;
+  }
+
+  /* Error Fallback */
+  .error-fallback {
+    @apply p-4 bg-red-100 text-red-700 rounded-md;
+  }
+
+  .error-fallback h2 {
+    @apply text-lg font-semibold mb-2;
+  }
+
+  /* Header */
+  .admin-header {
+    @apply flex items-start justify-between flex-col sm:flex-row gap-3 sm:gap-5 mb-5 sm:mb-10;
+  }
+
+  /* Search */
+  .admin-search {
+    @apply flex border border-gray-100 min-h-12 sm:min-h-14 items-center gap-1 rounded-md bg-light-600 px-4 w-full sm:max-w-md;
+  }
+
+  .admin-search_input {
+    @apply w-full border-0 shadow-none bg-transparent outline-none focus:outline-none focus:ring-0 focus:border-0 !important;
+  }
+
+  /* Sidebar */
+  .admin-sidebar {
+    @apply sticky left-0 top-0 flex h-dvh flex-col justify-between bg-white px-3 lg:px-5 pb-5 pt-10;
+  }
+
+  .admin-sidebar .logo {
+    @apply flex flex-row items-center gap-2 border-b border-dashed border-primary-admin/20 pb-10 lg:justify-start justify-center;
+  }
+
+  .admin-sidebar .logo h1 {
+    @apply text-2xl font-semibold text-primary-admin;
+  }
+
+  .admin-sidebar .link {
+    @apply flex flex-row items-center w-full gap-2 rounded-lg px-3 lg:px-5 py-3.5 lg:justify-start justify-center;
+  }
+
+  .admin-sidebar .link p {
+    @apply text-base font-medium;
+  }
+
+  .admin-sidebar .user {
+    @apply my-8 flex w-full flex-row gap-2 rounded-full border border-light-400 px-2 lg:px-6 py-2 shadow-sm lg:justify-start justify-center;
+  }
+
+  /* User Card */
+  .user-card {
+    @apply bg-light-300 py-4 px-2 sm:px-3 flex justify-center items-center flex-col rounded-xl text-center;
+  }
+
+  .user-card .name {
+    @apply font-medium mt-3 text-dark-400 line-clamp-1 w-full break-words;
+  }
+
+  .user-card .email {
+    @apply text-light-500 text-sm line-clamp-1 break-words w-full;
+  }
+
+  /* Users Table */
+  .users-table-container {
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden overflow-x-auto;
+  }
+
+  .users-table-header {
+    @apply flex items-center justify-between p-4 sm:p-6 border-b border-gray-100;
+  }
+
+  .users-table {
+    @apply w-full;
+  }
+
+  .users-table-head {
+    @apply bg-light-300;
+  }
+
+  .users-table-body {
+    @apply divide-y divide-gray-100;
+  }
+
+  .users-table-row {
+    @apply grid grid-cols-7 gap-4 items-center;
+  }
+
+  .users-table-head .users-table-row {
+    @apply py-3 sm:py-4 px-4 sm:px-6;
+  }
+
+  .users-table-body .users-table-row {
+    @apply py-3 sm:py-4 px-4 sm:px-6 hover:bg-light-300/50 transition-colors duration-200;
+  }
+
+  .users-table-cell {
+    @apply text-xs sm:text-sm;
+  }
+
+  .users-table-head .users-table-cell {
+    @apply font-semibold text-dark-400;
+  }
+
+  .users-table-body .users-table-cell {
+    @apply text-dark-400;
+  }
+
+  /* Role Badge */
+  .role-badge {
+    @apply inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity duration-200;
+  }
+
+  .role-user {
+    @apply bg-pink-100 text-pink-700;
+  }
+
+  .role-admin {
+    @apply bg-green-100 text-green-700;
+  }
+
+  /* Role Dropdown */
+  .role-dropdown {
+    @apply absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[100px];
+  }
+
+  .role-dropdown-item {
+    @apply w-full px-2 sm:px-3 py-2 text-left text-xs sm:text-sm hover:bg-light-300 flex items-center justify-between transition-colors duration-200;
+  }
+
+  .role-dropdown-item:first-child {
+    @apply rounded-t-lg;
+  }
+
+  .role-dropdown-item:last-child {
+    @apply rounded-b-lg;
+  }
+
+  /* View ID Card Button */
+  .view-id-card-btn {
+    @apply inline-flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200 text-xs sm:text-sm;
+  }
+
+  /* Action Button */
+  .action-btn {
+    @apply p-2 hover:bg-red-50 rounded-lg transition-colors duration-200;
+  }
+
+  /* All Users Page */
+  .all-users-container {
+    @apply space-y-6;
+  }
+
+  .all-users-header {
+    @apply flex items-center justify-between;
+  }
+
+  .all-users-table {
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden;
+  }
+
+  .all-users-table-header {
+    @apply bg-light-300 px-4 sm:px-6 py-3 sm:py-4;
+  }
+
+  .all-users-table-body {
+    @apply divide-y divide-gray-100;
+  }
+
+  .all-users-table-row {
+    @apply grid grid-cols-7 gap-4 items-center;
+  }
+
+  .all-users-table-body .all-users-table-row {
+    @apply px-4 sm:px-6 py-3 sm:py-4 hover:bg-light-300/30 transition-colors duration-200;
+  }
+
+  .all-users-table-cell {
+    @apply text-xs sm:text-sm;
+  }
+
+  /* All Users Role Badge */
+  .all-users-role-badge {
+    @apply inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity duration-200 border;
+  }
+
+  .all-users-role-badge.role-user {
+    @apply bg-pink-50 text-pink-600 border-pink-200;
+  }
+
+  .all-users-role-badge.role-admin {
+    @apply bg-green-50 text-green-600 border-green-200;
+  }
+
+  /* All Users Role Dropdown */
+  .all-users-role-dropdown {
+    @apply absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[100px] py-1;
+  }
+
+  .all-users-role-dropdown-item {
+    @apply w-full px-2 sm:px-3 py-2 text-left text-xs sm:text-sm hover:bg-light-300 flex items-center justify-between transition-colors duration-200;
+  }
+
+  /* All Users View ID Card Button */
+  .all-users-view-id-btn {
+    @apply inline-flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200 text-xs sm:text-sm;
+  }
+
+  /* All Users Action Button */
+  .all-users-action-btn {
+    @apply p-2 hover:bg-red-50 rounded-lg transition-colors duration-200;
+  }
+
+  /* All Books Page */
+  .all-books-container {
+    @apply space-y-6;
+  }
+
+  .all-books-card {
+    @apply bg-white rounded-xl border-2 border-blue-500 shadow-sm overflow-hidden;
+  }
+
+  .all-books-header {
+    @apply flex items-center justify-between p-4 sm:p-6 border-b border-gray-100 flex-wrap gap-4;
+  }
+
+  .all-books-create-btn {
+    @apply inline-flex items-center gap-2 bg-primary-admin text-white px-3 sm:px-4 py-2 rounded-lg font-medium hover:bg-primary-admin/90 transition-colors duration-200 text-sm;
+  }
+
+  .all-books-table {
+    @apply w-full;
+  }
+
+  .all-books-table-header {
+    @apply bg-light-300 px-4 sm:px-6 py-3 sm:py-4;
+  }
+
+  .all-books-table-body {
+    @apply divide-y divide-gray-100;
+  }
+
+  .all-books-table-row {
+    @apply grid grid-cols-5 gap-4 items-center;
+  }
+
+  .all-books-table-body .all-books-table-row {
+    @apply px-4 sm:px-6 py-3 sm:py-4 hover:bg-light-300/30 transition-colors duration-200;
+  }
+
+  .all-books-table-cell {
+    @apply text-xs sm:text-sm;
+  }
+
+  .all-books-edit-btn {
+    @apply p-2 hover:bg-blue-50 rounded-lg transition-colors duration-200;
+  }
+
+  .all-books-delete-btn {
+    @apply p-2 hover:bg-red-50 rounded-lg transition-colors duration-200;
+  }
+
+  /* Borrow Requests Page */
+  /* Borrow Requests Detail Page */
+  .borrow-requests-detail {
+    @apply space-y-6;
+  }
+}
+/* Account Requests Page */
+.account-requests-container {
+  @apply space-y-6;
+}
+
+.account-requests-header {
+  @apply flex items-center justify-between flex-wrap gap-4;
+}
+
+.account-requests-table {
+  @apply bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden overflow-x-auto;
+}
+
+.account-requests-table-header {
+  @apply bg-light-300 px-4 sm:px-6 py-3 sm:py-4;
+}
+
+.account-requests-table-body {
+  @apply divide-y divide-gray-100;
+}
+
+.account-requests-table-row {
+  @apply grid grid-cols-5 gap-4 items-center;
+}
+
+.account-requests-table-body .account-requests-table-row {
+  @apply px-4 sm:px-6 py-3 sm:py-4 hover:bg-light-300/30 transition-colors duration-200;
+}
+
+.account-requests-table-cell {
+  @apply text-xs sm:text-sm;
+}
+
+.account-requests-view-id-btn {
+  @apply text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200 text-xs sm:text-sm;
+}
+
+.account-requests-approve-btn {
+  @apply bg-green-100 text-green-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm font-medium hover:bg-green-200 transition-colors duration-200;
+}
+
+.account-requests-deny-btn {
+  @apply p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4;
+}
+
+.modal-content {
+  @apply bg-white rounded-xl p-6 sm:p-8 max-w-md w-full relative text-center;
+}
+
+.modal-close-btn {
+  @apply absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 transition-colors duration-200;
+}
+
+.modal-icon-container {
+  @apply size-16 sm:size-20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6;
+}
+
+.modal-icon-inner {
+  @apply size-10 sm:size-14 rounded-full flex items-center justify-center;
+}
+
+.modal-title {
+  @apply text-lg sm:text-xl font-semibold text-dark-400 mb-3 sm:mb-4;
+}
+
+.modal-description {
+  @apply text-light-500 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base;
+}
+
+.modal-confirm-btn {
+  @apply w-full py-2 sm:py-3 px-4 rounded-lg text-white font-medium transition-colors duration-200 text-sm sm:text-base;
+}
+
+/* Create Book Page */
+.form-group {
+  @apply space-y-1 sm:space-y-2;
+}
+
+.form-label {
+  @apply block text-sm sm:text-base font-medium text-gray-700;
+}
+
+.form-input {
+  @apply w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+}
+
+.form-textarea {
+  @apply w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none;
+}
+
+.upload-area {
+  @apply w-full px-3 sm:px-4 py-6 sm:py-8 border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-gray-300 transition-colors duration-200 cursor-pointer;
+}
+
+.color-picker-container {
+  @apply flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg;
+}
+
+.color-preview {
+  @apply w-6 h-6 rounded border border-gray-300;
+}
+
+.color-input {
+  @apply flex-1 text-sm sm:text-base font-medium text-gray-700 bg-transparent outline-none;
+}
+
+.submit-button {
+  @apply w-full py-3 sm:py-4 bg-primary-admin text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-primary-admin/90 transition-colors duration-200;
+}
+
+/* Upload Area with File */
+.upload-area-with-file {
+  @apply w-full;
+}
+
+.uploaded-file {
+  @apply flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg bg-blue-50;
+}
+
+.file-info {
+  @apply flex items-center gap-2 sm:gap-3;
+}
+
+.file-icon {
+  @apply text-lg;
+}
+
+.file-name {
+  @apply text-blue-600 font-medium text-sm sm:text-base truncate;
+}
+
+.remove-file-btn {
+  @apply p-1 text-gray-400 hover:text-gray-600 transition-colors duration-200;
+}
