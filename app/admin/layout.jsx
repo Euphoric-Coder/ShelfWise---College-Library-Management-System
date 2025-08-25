@@ -3,6 +3,7 @@
 import Sidebar from "@/components/Admin/Sidebar";
 import React, { useState } from "react";
 import "@/styles/admin.css"
+import Header from "@/components/Admin/Header";
 
 const layout = ({ children }) => {
   const [currentPage, setCurrentPage] = useState("home");
@@ -10,6 +11,7 @@ const layout = ({ children }) => {
     <div className="flex min-h-screen">
       <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
       <div className="admin-container">
+        <Header />
         {children}
       </div>
     </div>
