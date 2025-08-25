@@ -4,11 +4,11 @@ import { Search } from "lucide-react";
 const Header = () => {
   return (
     <div className="admin-header">
-      <div className="lg:ml-0 ml-16">
+      <div>
         <h1 className="text-2xl font-semibold text-dark-400 mb-2">
           Welcome, Adrian
         </h1>
-        <p className="text-light-500 hidden sm:block">
+        <p className="text-light-500">
           Monitor all of your projects and tasks here
         </p>
       </div>
@@ -17,7 +17,7 @@ const Header = () => {
         <Search className="size-5 text-light-500" />
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search users, books by title, author, or genre..."
           className="admin-search_input"
         />
       </div>

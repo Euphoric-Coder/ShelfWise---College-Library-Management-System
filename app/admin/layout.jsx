@@ -7,9 +7,9 @@ import "@/app/admin/admin.css";
 const layout = ({ children }) => {
   const [currentPage, setCurrentPage] = useState("home");
   return (
-    <div>
+    <div className="flex min-h-screen">
       <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
-      <div className="flex w-[calc(100%-264px)] flex-1 flex-col bg-light-300 p-5 xs:p-10">
+      <div className="admin-container">
         {children}
       </div>
     </div>
