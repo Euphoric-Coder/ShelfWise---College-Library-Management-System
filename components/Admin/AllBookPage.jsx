@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Edit, Trash2, Plus, AlertTriangle, X } from "lucide-react";
 import CreateBookPage from "./CreateBookPage";
 import EditBookPage from "./EditBookPage";
+import { redirect, useRouter } from "next/navigation";
 
 const AllBooksPage = () => {
   const [showCreateForm, setShowCreateForm] = useState(null);
@@ -11,6 +12,8 @@ const AllBooksPage = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(null);
   const [bookToDelete, setBookToDelete] = useState(null);
+
+  const router = useRouter();
 
   const books = [
     {
@@ -217,7 +220,9 @@ const AllBooksPage = () => {
                   <div className="all-books-table-cell">
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => handleEditBook(book)}
+                        onClick={() =>
+                          router.push(`/admin/all-books/edit-book/${book.id}`)
+                        }
                         className="all-books-edit-btn"
                       >
                         <Edit className="w-4 h-4 text-blue-500" />
