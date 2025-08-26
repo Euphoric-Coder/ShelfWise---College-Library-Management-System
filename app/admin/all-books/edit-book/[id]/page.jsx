@@ -8,6 +8,7 @@ const page = () => {
     author: "Rachel Hxeng",
     genre: "Strategic, Fantasy",
     dateCreated: "Dec 19 2023",
+    totalBooks: 120,
     coverUrl:
       "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
     primaryColor: "#C4214C",

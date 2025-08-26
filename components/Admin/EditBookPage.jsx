@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
 
-const EditBookPage = ({ onGoBack, bookData }) => {
+const EditBookPage = ({ bookData }) => {
   const [formData, setFormData] = useState({
     title: bookData.title,
     author: bookData.author,
@@ -39,7 +39,9 @@ const EditBookPage = ({ onGoBack, bookData }) => {
   return (
     <div className="w-full space-y-6">
       <button
-        onClick={onGoBack}
+        onClick={() => {
+          window.history.back();
+        }}
         className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-8 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
