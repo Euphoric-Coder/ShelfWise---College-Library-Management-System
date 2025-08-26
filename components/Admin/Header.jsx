@@ -1,7 +1,7 @@
 import React from "react";
 import { Search } from "lucide-react";
 
-const Header = () => {
+const Header = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="admin-header">
       <div>
@@ -17,6 +17,8 @@ const Header = () => {
         <Search className="size-5 text-light-500" />
         <input
           type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search users, books by title, author, or genre..."
           className="admin-search_input"
         />

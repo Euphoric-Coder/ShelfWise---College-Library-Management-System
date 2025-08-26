@@ -278,22 +278,24 @@ const AllUsersPage = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button
-                    className={`px-4 py-1.5 rounded-full text-sm font-medium flex items-center justify-center gap-1 border focus:outline-none focus:ring-0 transition-colors ${
+                    className={`all-users-role-badge focus:outline-none focus:ring-0 focus-visible:ring-0 ${
                       user.role === "Admin"
-                        ? "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
-                        : "bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100"
+                        ? "bg-green-100 text-green-700 border-green-700"
+                        : "bg-pink-100 text-pink-700 border-pink-700"
                     }`}
                   >
                     {user.role}
                     <ChevronDown className="w-3 h-3" />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="min-w-[140px]">
+                <DropdownMenuContent className="min-w-[120px]">
                   <DropdownMenuItem
                     onClick={() => handleRoleChange(user.id, "User")}
                     className="flex items-center justify-between"
                   >
-                    <span className="text-pink-600 font-medium">User</span>
+                    <span className="all-users-role-badge-dropdown role-user">
+                      User
+                    </span>
                     {user.role === "User" && (
                       <Check className="w-4 h-4 text-pink-600" />
                     )}
@@ -302,7 +304,9 @@ const AllUsersPage = () => {
                     onClick={() => handleRoleChange(user.id, "Admin")}
                     className="flex items-center justify-between"
                   >
-                    <span className="text-green-600 font-medium">Admin</span>
+                    <span className="all-users-role-badge-dropdown role-admin">
+                      Admin
+                    </span>
                     {user.role === "Admin" && (
                       <Check className="w-4 h-4 text-green-600" />
                     )}
