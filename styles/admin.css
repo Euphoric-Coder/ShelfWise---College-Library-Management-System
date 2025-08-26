@@ -500,7 +500,7 @@
 }
 
 .modal-confirm-btn {
-  @apply w-full py-2 sm:py-3 px-4 rounded-lg text-white font-medium transition-colors duration-200 text-sm sm:text-base;
+  @apply w-full py-2 sm:py-3 px-4 rounded-lg text-white bg-[#4C7B62] font-extrabold transition-colors duration-200 text-sm sm:text-base;
 }
 
 /* Create Book Page */

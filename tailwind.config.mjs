@@ -97,6 +97,20 @@ export default {
         gray: {
           100: "#CBD5E1",
         },
+        approve: {
+          DEFAULT: "#4C7B62",
+          100: "#ECFDF3",
+          400: "#4C7B62",
+          500: "#2CC171",
+          800: "#027A48",
+        },
+        deny: {
+          DEFAULT: "#EF3A4B",
+          100: "#F46F70",
+          400: "#E27233",
+          500: "#EF3A4B",
+          800: "#EF3A4B",
+        }
       },
       screens: {
         xs: "480px",

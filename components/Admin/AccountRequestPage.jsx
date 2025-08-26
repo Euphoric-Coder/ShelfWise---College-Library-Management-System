@@ -166,7 +166,7 @@ const AccountRequestsPage = () => {
             </button>
 
             <div className="modal-icon-container bg-green-100">
-              <div className="modal-icon-inner bg-green-500">
+              <div className="modal-icon-inner bg-approve-400">
                 <Check className="size-8 text-white" />
               </div>
             </div>
@@ -179,7 +179,7 @@ const AccountRequestsPage = () => {
 
             <button
               onClick={confirmApprove}
-              className="modal-confirm-btn bg-green-500 hover:bg-green-600"
+              className="modal-confirm-btn hover:bg-green-600"
             >
               Approve & Send Confirmation
             </button>
@@ -196,7 +196,7 @@ const AccountRequestsPage = () => {
             </button>
 
             <div className="modal-icon-container bg-red-100">
-              <div className="modal-icon-inner bg-red-500">
+              <div className="modal-icon-inner bg-[#F46F70]">
                 <AlertCircle className="size-8 text-white" />
               </div>
             </div>
@@ -209,7 +209,7 @@ const AccountRequestsPage = () => {
 
             <button
               onClick={confirmDeny}
-              className="modal-confirm-btn bg-red-500 hover:bg-red-600"
+              className="modal-confirm-btn bg-[#F46F70] hover:bg-red-600"
             >
               Deny & Notify Student
             </button>

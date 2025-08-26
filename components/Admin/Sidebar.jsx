@@ -4,6 +4,7 @@ import React from "react";
 import { Home, Users, BookOpen, UserCheck, BookPlus } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -62,12 +63,13 @@ const Sidebar = () => {
 
       {/* User Section */}
       <div className="user flex items-center gap-3 p-4">
-        <div className="size-10 bg-primary-admin rounded-full flex items-center justify-center text-white font-semibold">
-          A
-        </div>
-        <div className="flex-1 max-md:hidden">
+        <Avatar>
+          <AvatarImage src="https://github.com/shadcn.ng" />
+          <AvatarFallback className="bg-primary-admin text-white">CN</AvatarFallback>
+        </Avatar>
+        <div className="flex-1">
           <p className="font-medium text-dark-400">Adrian Hajdin</p>
-          <p className="text-sm text-light-500">adrian@jsmastery.pro</p>
+          <p className="text-sm text-light-500">adrian@jsmastery</p>
         </div>
       </div>
     </div>
