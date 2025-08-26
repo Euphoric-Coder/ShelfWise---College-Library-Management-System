@@ -208,14 +208,14 @@ const AllUsersPage = () => {
       </div>
 
       {/* Mobile Cards */}
-      <div className="space-y-5 md:hidden">
+      <div className="space-y-5">
         {users.map((user) => (
           <Card
             key={user.id}
-            className="rounded-2xl shadow-sm border border-gray-200"
+            className="rounded-3xl shadow-sm border border-gray-200 overflow-hidden"
           >
-            {/* Header */}
-            <CardHeader className="flex items-center gap-4">
+            {/* Header with Light Gradient */}
+            <CardHeader className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 p-4 flex items-center gap-4">
               <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
               >
@@ -230,26 +230,32 @@ const AllUsersPage = () => {
             </CardHeader>
 
             {/* Content */}
-            <CardContent className="space-y-3 text-sm text-gray-700">
-              <p>
-                <span className="font-semibold">Date Joined:</span>{" "}
+            <CardContent className="bg-white p-4 space-y-3 text-sm text-gray-700">
+              <div className="border-b pb-2">
+                <span className="font-semibold text-gray-600">
+                  Date Joined:
+                </span>{" "}
                 {user.dateJoined}
-              </p>
-              <p>
-                <span className="font-semibold">Books Borrowed:</span>{" "}
+              </div>
+              <div className="border-b pb-2">
+                <span className="font-semibold text-gray-600">
+                  Books Borrowed:
+                </span>{" "}
                 {user.booksBorrowed}
-              </p>
-              <p>
-                <span className="font-semibold">University ID:</span>{" "}
+              </div>
+              <div className="border-b pb-2">
+                <span className="font-semibold text-gray-600">
+                  University ID:
+                </span>{" "}
                 {user.universityId}
-              </p>
-              <p>
-                <span className="font-semibold">ID Card:</span>{" "}
+              </div>
+              <div>
+                <span className="font-semibold text-gray-600">ID Card:</span>{" "}
                 <button className="text-blue-600 hover:underline inline-flex items-center">
                   View ID Card
                   <ExternalLink className="w-4 h-4 ml-1" />
                 </button>
-              </p>
+              </div>
             </CardContent>
 
             {/* Footer */}
@@ -260,8 +266,8 @@ const AllUsersPage = () => {
                   <button
                     className={`px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center gap-1 border focus:outline-none focus:ring-0 ${
                       user.role === "Admin"
-                        ? "bg-green-100 text-green-700 border-green-300"
-                        : "bg-pink-100 text-pink-700 border-pink-300"
+                        ? "bg-green-50 text-green-700 border-green-200"
+                        : "bg-pink-50 text-pink-700 border-pink-200"
                     }`}
                   >
                     {user.role}
