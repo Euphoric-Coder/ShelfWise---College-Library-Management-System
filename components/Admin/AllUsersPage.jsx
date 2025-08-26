@@ -11,12 +11,18 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 const AllUsersPage = () => {
   const [users, setUsers] = useState([
@@ -199,6 +205,98 @@ const AllUsersPage = () => {
             ))}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="space-y-5 md:hidden">
+        {users.map((user) => (
+          <Card
+            key={user.id}
+            className="rounded-2xl shadow-sm border border-gray-200"
+          >
+            {/* Header */}
+            <CardHeader className="flex items-center gap-4">
+              <div
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
+              >
+                {user.initials}
+              </div>
+              <div>
+                <CardTitle className="text-lg font-bold text-gray-800">
+                  {user.name}
+                </CardTitle>
+                <p className="text-sm text-gray-600">{user.email}</p>
+              </div>
+            </CardHeader>
+
+            {/* Content */}
+            <CardContent className="space-y-3 text-sm text-gray-700">
+              <p>
+                <span className="font-semibold">Date Joined:</span>{" "}
+                {user.dateJoined}
+              </p>
+              <p>
+                <span className="font-semibold">Books Borrowed:</span>{" "}
+                {user.booksBorrowed}
+              </p>
+              <p>
+                <span className="font-semibold">University ID:</span>{" "}
+                {user.universityId}
+              </p>
+              <p>
+                <span className="font-semibold">ID Card:</span>{" "}
+                <button className="text-blue-600 hover:underline inline-flex items-center">
+                  View ID Card
+                  <ExternalLink className="w-4 h-4 ml-1" />
+                </button>
+              </p>
+            </CardContent>
+
+            {/* Footer */}
+            <CardFooter className="flex justify-between items-center gap-2 bg-gray-50 px-4 py-3 border-t">
+              {/* Role Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className={`px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center gap-1 border focus:outline-none focus:ring-0 ${
+                      user.role === "Admin"
+                        ? "bg-green-100 text-green-700 border-green-300"
+                        : "bg-pink-100 text-pink-700 border-pink-300"
+                    }`}
+                  >
+                    {user.role}
+                    <ChevronDown className="w-3 h-3" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="min-w-[140px]">
+                  <DropdownMenuItem
+                    onClick={() => handleRoleChange(user.id, "User")}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="text-pink-600 font-medium">User</span>
+                    {user.role === "User" && (
+                      <Check className="w-4 h-4 text-pink-600" />
+                    )}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleRoleChange(user.id, "Admin")}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="text-green-600 font-medium">Admin</span>
+                    {user.role === "Admin" && (
+                      <Check className="w-4 h-4 text-green-600" />
+                    )}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Delete */}
+              <button className="p-2 rounded-md hover:bg-red-50 transition-colors">
+                <Trash2 className="w-5 h-5 text-red-500" />
+              </button>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
     </div>
   );
