@@ -1,7 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, X, Check, AlertCircle, ExternalLink } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { ChevronDown, X, Check, AlertCircle, ExternalLink, XCircle } from "lucide-react";
 
 const AccountRequestsPage = () => {
   const [requests] = useState([
@@ -66,45 +82,50 @@ const AccountRequestsPage = () => {
 
   return (
     <>
-      <div className="account-requests-container">
-        <div className="account-requests-header">
-          <h1 className="text-2xl font-semibold text-dark-400">
-            Account Registration Requests
-          </h1>
-          <div className="flex items-center gap-2 text-sm text-light-500">
-            <span>Oldest to Recent</span>
-            <ChevronDown className="size-4" />
-          </div>
+      <div className="account-requests-header mb-4">
+        <h1 className="text-2xl font-semibold text-dark-400">
+          Account Registration Requests
+        </h1>
+        <div className="flex items-center gap-2 text-sm text-light-500">
+          <span>Oldest to Recent</span>
+          <ChevronDown className="size-4" />
         </div>
+      </div>
 
-        <div className="account-requests-table">
-          <div className="account-requests-table-header">
-            <div className="account-requests-table-row">
-              <div className="account-requests-table-cell font-medium text-light-500">
+      {/* Styled Table Container */}
+      <div className="overflow-hidden hidden lg:flex rounded-3xl border border-gray-200 shadow-sm">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-[#f7f8ff] hover:bg-[#f7f8ff]">
+              <TableHead className="text-left font-semibold text-gray-700 py-4">
                 Name
-              </div>
-              <div className="account-requests-table-cell font-medium text-light-500">
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-4">
                 Date Joined
-              </div>
-              <div className="account-requests-table-cell font-medium text-light-500">
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-4">
                 University ID No
-              </div>
-              <div className="account-requests-table-cell font-medium text-light-500">
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-4">
                 University ID Card
-              </div>
-              <div className="account-requests-table-cell font-medium text-light-500">
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-4">
                 Actions
-              </div>
-            </div>
-          </div>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
 
-          <div className="account-requests-table-body">
+          <TableBody>
             {requests.map((request) => (
-              <div key={request.id} className="account-requests-table-row">
-                <div className="account-requests-table-cell">
-                  <div className="flex items-center gap-3">
+              <TableRow
+                key={request.id}
+                className="bg-white hover:bg-gray-50 transition-colors"
+              >
+                {/* Name + Avatar (Left aligned) */}
+                <TableCell className="text-left py-4">
+                  <div className="flex items-center gap-4">
                     <div
-                      className={`size-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${request.bgColor}`}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${request.bgColor}`}
                     >
                       {request.initials}
                     </div>
@@ -115,49 +136,109 @@ const AccountRequestsPage = () => {
                       <p className="text-sm text-light-500">{request.email}</p>
                     </div>
                   </div>
-                </div>
+                </TableCell>
 
-                <div className="account-requests-table-cell">
+                {/* Date Joined (Center aligned) */}
+                <TableCell className="text-center py-4">
                   <span className="text-dark-400 text-base">
                     {request.dateJoined}
                   </span>
-                </div>
+                </TableCell>
 
-                <div className="account-requests-table-cell">
+                {/* University ID (Center aligned) */}
+                <TableCell className="text-center py-4">
                   <span className="text-dark-400 text-base">
                     {request.universityId}
                   </span>
-                </div>
+                </TableCell>
 
-                <div className="account-requests-table-cell">
-                  <button className="account-requests-view-id-btn">
-                    <span>
-                      View ID Card
-                      <ExternalLink className="size-4 ml-1" />
-                    </span>
+                {/* University ID Card (Center aligned) */}
+                <TableCell className="text-center py-4">
+                  <button className="text-blue-600 hover:underline inline-flex items-center text-sm">
+                    View ID Card
+                    <ExternalLink className="w-4 h-4 ml-1" />
                   </button>
-                </div>
+                </TableCell>
 
-                <div className="account-requests-table-cell">
-                  <div className="flex items-center gap-2">
+                {/* Actions (Center aligned) */}
+                <TableCell className="text-center py-4">
+                  <div className="flex items-center gap-2 justify-center">
                     <button
                       onClick={() => handleApprove(request)}
-                      className="account-requests-approve-btn"
+                      className="px-3 py-2 text-sm rounded-md font-semibold text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
                     >
                       Approve Account
                     </button>
                     <button
                       onClick={() => handleDeny(request)}
-                      className="account-requests-deny-btn"
+                      className="p-2 rounded-md text-red-600 hover:bg-red-100 transition-colors"
                     >
-                      <X className="size-4" />
+                      <XCircle className="w-5 h-5" />
                     </button>
                   </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="space-y-4 lg:hidden">
+        {requests.map((request) => (
+          <Card key={request.id} className="border border-gray-200 shadow-sm">
+            <CardHeader>
+              <div className="flex items-center gap-4">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${request.bgColor}`}
+                >
+                  {request.initials}
+                </div>
+                <div>
+                  <CardTitle className="text-lg font-semibold text-dark-400">
+                    {request.name}
+                  </CardTitle>
+                  <p className="text-sm text-light-500">{request.email}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm">
+              <p>
+                <span className="font-semibold text-gray-600">
+                  Date Joined:
+                </span>{" "}
+                {request.dateJoined}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-600">
+                  University ID:
+                </span>{" "}
+                {request.universityId}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-600">ID Card:</span>{" "}
+                <button className="text-blue-600 hover:underline inline-flex items-center">
+                  View ID Card
+                  <ExternalLink className="w-4 h-4 ml-1" />
+                </button>
+              </p>
+            </CardContent>
+            <CardFooter className="flex justify-end gap-2">
+              <button
+                onClick={() => handleApprove(request)}
+                className="px-3 py-2 text-sm rounded-md font-semibold text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
+              >
+                Approve
+              </button>
+              <button
+                onClick={() => handleDeny(request)}
+                className="p-2 rounded-md text-red-600 hover:bg-red-100 transition-colors"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
 
       {/* Approve Modal */}
