@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, X, Check, AlertCircle } from "lucide-react";
+import { ChevronDown, X, Check, AlertCircle, ExternalLink } from "lucide-react";
 
 const AccountRequestsPage = () => {
   const [requests] = useState([
@@ -131,7 +131,10 @@ const AccountRequestsPage = () => {
 
                 <div className="account-requests-table-cell">
                   <button className="account-requests-view-id-btn">
-                    <span>View ID Card</span>
+                    <span>
+                      View ID Card
+                      <ExternalLink className="size-4 ml-1" />
+                    </span>
                   </button>
                 </div>
 
@@ -179,7 +182,7 @@ const AccountRequestsPage = () => {
 
             <button
               onClick={confirmApprove}
-              className="modal-confirm-btn hover:bg-green-600"
+              className="modal-confirm-btn bg-[#4C7B62] hover:bg-green-800"
             >
               Approve & Send Confirmation
             </button>
