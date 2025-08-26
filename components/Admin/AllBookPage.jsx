@@ -2,14 +2,9 @@
 
 import React, { useState } from "react";
 import { Edit, Trash2, Plus, AlertTriangle, X } from "lucide-react";
-import CreateBookPage from "./CreateBookPage";
-import EditBookPage from "./EditBookPage";
 import { useRouter } from "next/navigation";
 
 const AllBooksPage = () => {
-  const [showCreateForm, setShowCreateForm] = useState(null);
-  const [showEditForm, setShowEditForm] = useState(null);
-  const [selectedBook, setSelectedBook] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(null);
   const [bookToDelete, setBookToDelete] = useState(null);
 
