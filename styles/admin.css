@@ -340,7 +340,11 @@
 
   /* All Users Role Badge */
   .all-users-role-badge {
-    @apply inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity duration-200 border;
+    @apply px-3 py-1.5 rounded-3xl text-sm font-medium flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity duration-200 border;
+  }
+
+  .all-users-role-badge-dropdown {
+    @apply inline-flex items-center px-2 sm:px-3 rounded-3xl text-xs sm:text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity duration-200 border;
   }
 
   .all-users-role-badge.role-user {
@@ -353,11 +357,11 @@
 
   /* All Users Role Dropdown */
   .all-users-role-dropdown {
-    @apply absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[100px] py-1;
+    @apply absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[110px] py-1;
   }
 
   .all-users-role-dropdown-item {
-    @apply w-full px-2 sm:px-3 py-2 text-left text-xs sm:text-sm hover:bg-light-300 flex items-center justify-between transition-colors duration-200;
+    @apply w-full px-1 py-2 text-left text-xs sm:text-sm hover:bg-light-300 flex items-center justify-between transition-colors duration-200;
   }
 
   /* All Users View ID Card Button */

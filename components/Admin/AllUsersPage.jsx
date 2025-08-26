@@ -2,9 +2,15 @@
 
 import React, { useState } from "react";
 import { ExternalLink, Trash2, ChevronDown, Check } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const AllUsersPage = () => {
-  const [users] = useState([
+  const [users, setUsers] = useState([
     {
       id: "1",
       name: "Darrell Steward",
@@ -43,7 +49,7 @@ const AllUsersPage = () => {
       name: "Darrell Steward",
       email: "darrellsteward@gmail.com",
       dateJoined: "Dec 19 2023",
-      role: "Admin",
+      role: "User",
       booksBorrowed: 10,
       universityId: "90324423789",
       initials: "DS",
@@ -54,7 +60,7 @@ const AllUsersPage = () => {
       name: "Marc Atenson",
       email: "marcinee@mial.com",
       dateJoined: "Dec 19 2023",
-      role: "User",
+      role: "Admin",
       booksBorrowed: 32,
       universityId: "90324423789",
       initials: "MA",
@@ -73,15 +79,10 @@ const AllUsersPage = () => {
     },
   ]);
 
-  const [dropdownOpen, setDropdownOpen] = useState(null);
-
-  const toggleDropdown = (userId) => {
-    setDropdownOpen(dropdownOpen === userId ? null : userId);
-  };
-
   const handleRoleChange = (userId, newRole) => {
-    // Handle role change logic here
-    setDropdownOpen(null);
+    setUsers((prev) =>
+      prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
+    );
   };
 
   return (
@@ -90,11 +91,11 @@ const AllUsersPage = () => {
         <h1 className="text-2xl font-semibold text-dark-400">All Users</h1>
         <div className="flex items-center gap-2 text-sm text-light-500">
           <span>A-Z</span>
-          <ChevronDown className="size-4" />
+          <ChevronDown className="w-4 h-4" />
         </div>
       </div>
 
-      <div className="all-users-table">
+      <div className="all-users-table mt-6">
         <div className="all-users-table-header">
           <div className="all-users-table-row">
             <div className="all-users-table-cell font-medium text-light-500">
@@ -124,10 +125,11 @@ const AllUsersPage = () => {
         <div className="all-users-table-body">
           {users.map((user) => (
             <div key={user.id} className="all-users-table-row">
+              {/* Name */}
               <div className="all-users-table-cell">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`size-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
+                    className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
                   >
                     {user.initials}
                   </div>
@@ -140,73 +142,77 @@ const AllUsersPage = () => {
                 </div>
               </div>
 
+              {/* Date */}
               <div className="all-users-table-cell">
                 <span className="text-dark-400 text-base">
                   {user.dateJoined}
                 </span>
               </div>
 
+              {/* Role with DropdownMenu */}
               <div className="all-users-table-cell">
-                <div className="relative">
-                  <button
-                    onClick={() => toggleDropdown(user.id)}
-                    className={`all-users-role-badge ${
-                      user.role === "Admin" ? "role-admin" : "role-user"
-                    }`}
-                  >
-                    {user.role}
-                    <ChevronDown className="size-3 ml-1" />
-                  </button>
-
-                  {dropdownOpen === user.id && (
-                    <div className="all-users-role-dropdown">
-                      <button
-                        onClick={() => handleRoleChange(user.id, "User")}
-                        className="all-users-role-dropdown-item"
-                      >
-                        <span className="text-pink-600 font-medium">User</span>
-                        {user.role === "User" && (
-                          <Check className="size-4 text-pink-600" />
-                        )}
-                      </button>
-                      <button
-                        onClick={() => handleRoleChange(user.id, "Admin")}
-                        className="all-users-role-dropdown-item"
-                      >
-                        <span className="text-green-600 font-medium">
-                          Admin
-                        </span>
-                        {user.role === "Admin" && (
-                          <Check className="size-4 text-green-600" />
-                        )}
-                      </button>
-                    </div>
-                  )}
-                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild className="">
+                    <button
+                      className={`all-users-role-badge focus:outline-none focus:ring-0 focus-visible:ring-0 ${
+                        user.role === "Admin"
+                          ? "bg-green-100 text-green-700 border-green-700"
+                          : "bg-pink-100 text-pink-700 border-pink-700"
+                      }`}
+                    >
+                      {user.role}
+                      <ChevronDown className="w-3 h-3" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="min-w-[120px]">
+                    <DropdownMenuItem
+                      onClick={() => handleRoleChange(user.id, "User")}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-pink-600 font-medium">User</span>
+                      {user.role === "User" && (
+                        <Check className="w-4 h-4 text-pink-600" />
+                      )}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleRoleChange(user.id, "Admin")}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-green-600 font-medium">Admin</span>
+                      {user.role === "Admin" && (
+                        <Check className="w-4 h-4 text-green-600" />
+                      )}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
 
+              {/* Books Borrowed */}
               <div className="all-users-table-cell">
                 <span className="text-dark-400 text-base">
                   {user.booksBorrowed}
                 </span>
               </div>
 
+              {/* University ID */}
               <div className="all-users-table-cell">
                 <span className="text-dark-400 text-base">
                   {user.universityId}
                 </span>
               </div>
 
+              {/* ID Card */}
               <div className="all-users-table-cell">
-                <button className="all-users-view-id-btn">
-                  <span>View ID Card</span>
-                  <ExternalLink className="size-4" />
+                <button className="text-blue-600 hover:underline flex items-center text-sm gap-1">
+                  View ID Card
+                  <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
 
+              {/* Action */}
               <div className="all-users-table-cell">
-                <button className="all-users-action-btn">
-                  <Trash2 className="size-4 text-red-500" />
+                <button className="p-2 rounded-md hover:bg-red-50">
+                  <Trash2 className="w-4 h-4 text-red-500" />
                 </button>
               </div>
             </div>
