@@ -1,9 +1,10 @@
+import CreateBookPage from '@/components/Admin/CreateBookPage'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        Add Books
+        <CreateBookPage />
     </div>
   )
 }
