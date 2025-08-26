@@ -1,9 +1,12 @@
-import React from 'react'
+import AllBooksPage from "@/components/Admin/AllBookPage";
+import React from "react";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <AllBooksPage />
+    </div>
+  );
+};
 
-export default page
+export default page;

@@ -54,7 +54,7 @@ const EditBookPage = ({ onGoBack, bookData }) => {
             name="title"
             value={formData.title}
             onChange={handleInputChange}
-            className="form-input"
+            className="admin-form-input"
           />
         </div>
 
@@ -65,7 +65,7 @@ const EditBookPage = ({ onGoBack, bookData }) => {
             name="author"
             value={formData.author}
             onChange={handleInputChange}
-            className="form-input"
+            className="admin-form-input"
           />
         </div>
 
@@ -76,7 +76,7 @@ const EditBookPage = ({ onGoBack, bookData }) => {
             name="genre"
             value={formData.genre}
             onChange={handleInputChange}
-            className="form-input"
+            className="admin-form-input"
           />
         </div>
 
@@ -87,7 +87,7 @@ const EditBookPage = ({ onGoBack, bookData }) => {
             name="totalBooks"
             value={formData.totalBooks}
             onChange={handleInputChange}
-            className="form-input"
+            className="admin-form-input"
           />
         </div>
 
