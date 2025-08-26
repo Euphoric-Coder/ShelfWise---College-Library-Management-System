@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { ExternalLink, Trash2, ChevronDown, Check } from "lucide-react";
+import {
+  ExternalLink,
+  Trash2,
+  ChevronDown,
+  Check,
+  XCircle,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -79,7 +85,7 @@ const AllUsersPage = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-3xl border border-gray-200 shadow-sm">
+      <div className="overflow-hidden hidden xl:flex rounded-3xl border border-gray-200 shadow-sm">
         <Table>
           <TableHeader>
             <TableRow className="bg-[#f7f8ff] hover:bg-[#f7f8ff]">
@@ -208,16 +214,16 @@ const AllUsersPage = () => {
       </div>
 
       {/* Mobile Cards */}
-      <div className="space-y-5">
+      <div className="space-y-5 xl:hidden">
         {users.map((user) => (
           <Card
             key={user.id}
-            className="rounded-3xl shadow-sm border border-gray-200 overflow-hidden"
+            className="rounded-2xl shadow-md hover:shadow-xl transition-all border border-gray-100 overflow-hidden"
           >
-            {/* Header with Light Gradient */}
-            <CardHeader className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 p-4 flex items-center gap-4">
+            {/* Header with Gradient + Glow */}
+            <CardHeader className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 p-5 flex items-center gap-4 shadow-sm">
               <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor} ring-2 ring-white shadow`}
               >
                 {user.initials}
               </div>
@@ -229,45 +235,53 @@ const AllUsersPage = () => {
               </div>
             </CardHeader>
 
-            {/* Content */}
-            <CardContent className="bg-white p-4 space-y-3 text-sm text-gray-700">
-              <div className="border-b pb-2">
-                <span className="font-semibold text-gray-600">
-                  Date Joined:
-                </span>{" "}
-                {user.dateJoined}
-              </div>
-              <div className="border-b pb-2">
-                <span className="font-semibold text-gray-600">
-                  Books Borrowed:
-                </span>{" "}
-                {user.booksBorrowed}
-              </div>
-              <div className="border-b pb-2">
-                <span className="font-semibold text-gray-600">
-                  University ID:
-                </span>{" "}
-                {user.universityId}
+            {/* Content with grid layout */}
+            <CardContent className="bg-white p-5 grid gap-4 text-sm">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 uppercase">
+                  Date Joined
+                </p>
+                <p className="text-base font-medium text-gray-800">
+                  {user.dateJoined}
+                </p>
               </div>
               <div>
-                <span className="font-semibold text-gray-600">ID Card:</span>{" "}
-                <button className="text-blue-600 hover:underline inline-flex items-center">
+                <p className="text-xs font-semibold text-gray-500 uppercase">
+                  Books Borrowed
+                </p>
+                <p className="text-base font-medium text-gray-800">
+                  {user.booksBorrowed}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 uppercase">
+                  University ID
+                </p>
+                <p className="text-base font-medium text-gray-800">
+                  {user.universityId}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 uppercase">
+                  ID Card
+                </p>
+                <button className="text-blue-600 hover:underline inline-flex items-center font-medium">
                   View ID Card
                   <ExternalLink className="w-4 h-4 ml-1" />
                 </button>
               </div>
             </CardContent>
 
-            {/* Footer */}
-            <CardFooter className="flex justify-between items-center gap-2 bg-gray-50 px-4 py-3 border-t">
-              {/* Role Dropdown */}
+            {/* Footer with modern pill buttons */}
+            <CardFooter className="flex justify-between items-center gap-2 bg-gradient-to-r from-gray-50 via-gray-50 to-pink-100 px-5 py-3 border-t">
+              {/* Role Dropdown as Badge */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center gap-1 border focus:outline-none focus:ring-0 ${
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium flex items-center justify-center gap-1 border focus:outline-none focus:ring-0 transition-colors ${
                       user.role === "Admin"
-                        ? "bg-green-50 text-green-700 border-green-200"
-                        : "bg-pink-50 text-pink-700 border-pink-200"
+                        ? "bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
+                        : "bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100"
                     }`}
                   >
                     {user.role}
@@ -296,9 +310,13 @@ const AllUsersPage = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Delete */}
-              <button className="p-2 rounded-md hover:bg-red-50 transition-colors">
-                <Trash2 className="w-5 h-5 text-red-500" />
+              {/* Delete button */}
+              <button
+                onClick={() => handleDeny(request)}
+                className="flex items-center p-2 rounded-3xl font-semibold text-sm text-red-600 bg-red-200 hover:bg-red-300 transition-colors"
+              >
+                <XCircle className="w-5 h-5 inline-block mr-1" />
+                Remove {user.role === "Admin" ? "Admin" : "Student"}
               </button>
             </CardFooter>
           </Card>
