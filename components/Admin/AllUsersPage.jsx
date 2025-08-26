@@ -8,6 +8,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const AllUsersPage = () => {
   const [users, setUsers] = useState([
@@ -44,39 +53,6 @@ const AllUsersPage = () => {
       initials: "SD",
       bgColor: "bg-blue-400",
     },
-    {
-      id: "4",
-      name: "Darrell Steward",
-      email: "darrellsteward@gmail.com",
-      dateJoined: "Dec 19 2023",
-      role: "User",
-      booksBorrowed: 10,
-      universityId: "90324423789",
-      initials: "DS",
-      bgColor: "bg-gray-600",
-    },
-    {
-      id: "5",
-      name: "Marc Atenson",
-      email: "marcinee@mial.com",
-      dateJoined: "Dec 19 2023",
-      role: "Admin",
-      booksBorrowed: 32,
-      universityId: "90324423789",
-      initials: "MA",
-      bgColor: "bg-green-500",
-    },
-    {
-      id: "6",
-      name: "Susan Drake",
-      email: "contact@susandrake.io",
-      dateJoined: "Dec 19 2023",
-      role: "User",
-      booksBorrowed: 13,
-      universityId: "90324423789",
-      initials: "SD",
-      bgColor: "bg-blue-400",
-    },
   ]);
 
   const handleRoleChange = (userId, newRole) => {
@@ -86,8 +62,9 @@ const AllUsersPage = () => {
   };
 
   return (
-    <div className="all-users-container">
-      <div className="all-users-header">
+    <div className="w-full">
+      {/* Page Header */}
+      <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-semibold text-dark-400">All Users</h1>
         <div className="flex items-center gap-2 text-sm text-light-500">
           <span>A-Z</span>
@@ -95,129 +72,133 @@ const AllUsersPage = () => {
         </div>
       </div>
 
-      <div className="all-users-table mt-6">
-        <div className="all-users-table-header">
-          <div className="all-users-table-row">
-            <div className="all-users-table-cell font-medium text-light-500">
-              Name
-            </div>
-            <div className="all-users-table-cell font-medium text-light-500">
-              Date Joined
-            </div>
-            <div className="all-users-table-cell font-medium text-light-500">
-              Role
-            </div>
-            <div className="all-users-table-cell font-medium text-light-500">
-              Books Borrowed
-            </div>
-            <div className="all-users-table-cell font-medium text-light-500">
-              University ID No
-            </div>
-            <div className="all-users-table-cell font-medium text-light-500">
-              University ID Card
-            </div>
-            <div className="all-users-table-cell font-medium text-light-500">
-              Action
-            </div>
-          </div>
-        </div>
+      {/* Table */}
+      <div className="overflow-hidden rounded-3xl border border-gray-200 shadow-sm">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-[#f7f8ff] hover:bg-[#f7f8ff]">
+              <TableHead className="text-left font-semibold text-gray-700 py-5">
+                Name
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-5">
+                Date Joined
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-5">
+                Role
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-5">
+                Books Borrowed
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-5">
+                University ID No
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-5">
+                University ID Card
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700 py-5">
+                Action
+              </TableHead>
+            </TableRow>
+          </TableHeader>
 
-        <div className="all-users-table-body">
-          {users.map((user) => (
-            <div key={user.id} className="all-users-table-row">
-              {/* Name */}
-              <div className="all-users-table-cell">
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
-                  >
-                    {user.initials}
+          <TableBody>
+            {users.map((user) => (
+              <TableRow
+                key={user.id}
+                className="bg-white hover:bg-gray-50 transition-colors"
+              >
+                {/* Name */}
+                <TableCell className="text-left py-5">
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${user.bgColor}`}
+                    >
+                      {user.initials}
+                    </div>
+                    <div>
+                      <p className="font-medium text-dark-400 text-base">
+                        {user.name}
+                      </p>
+                      <p className="text-sm text-light-500">{user.email}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-dark-400 text-base">
-                      {user.name}
-                    </p>
-                    <p className="text-sm text-light-500">{user.email}</p>
-                  </div>
-                </div>
-              </div>
+                </TableCell>
 
-              {/* Date */}
-              <div className="all-users-table-cell">
-                <span className="text-dark-400 text-base">
+                {/* Date Joined */}
+                <TableCell className="text-center py-5 text-dark-400 text-base">
                   {user.dateJoined}
-                </span>
-              </div>
+                </TableCell>
 
-              {/* Role with DropdownMenu */}
-              <div className="all-users-table-cell">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild className="">
-                    <button
-                      className={`all-users-role-badge focus:outline-none focus:ring-0 focus-visible:ring-0 ${
-                        user.role === "Admin"
-                          ? "bg-green-100 text-green-700 border-green-700"
-                          : "bg-pink-100 text-pink-700 border-pink-700"
-                      }`}
-                    >
-                      {user.role}
-                      <ChevronDown className="w-3 h-3" />
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="min-w-[120px]">
-                    <DropdownMenuItem
-                      onClick={() => handleRoleChange(user.id, "User")}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-pink-600 font-medium">User</span>
-                      {user.role === "User" && (
-                        <Check className="w-4 h-4 text-pink-600" />
-                      )}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => handleRoleChange(user.id, "Admin")}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-green-600 font-medium">Admin</span>
-                      {user.role === "Admin" && (
-                        <Check className="w-4 h-4 text-green-600" />
-                      )}
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
+                {/* Role Dropdown */}
+                <TableCell className="flex justify-center text-center py-5">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button
+                        className={`all-users-role-badge focus:outline-none focus:ring-0 focus-visible:ring-0 ${
+                          user.role === "Admin"
+                            ? "bg-green-100 text-green-700 border-green-700"
+                            : "bg-pink-100 text-pink-700 border-pink-700"
+                        }`}
+                      >
+                        {user.role}
+                        <ChevronDown className="w-3 h-3" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="min-w-[120px]">
+                      <DropdownMenuItem
+                        onClick={() => handleRoleChange(user.id, "User")}
+                        className="flex items-center justify-between"
+                      >
+                        <span className="all-users-role-badge-dropdown role-user">
+                          User
+                        </span>
+                        {user.role === "User" && (
+                          <Check className="w-4 h-4 text-pink-600" />
+                        )}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => handleRoleChange(user.id, "Admin")}
+                        className="flex items-center justify-between"
+                      >
+                        <span className="all-users-role-badge-dropdown role-admin">
+                          Admin
+                        </span>
+                        {user.role === "Admin" && (
+                          <Check className="w-4 h-4 text-green-600" />
+                        )}
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
 
-              {/* Books Borrowed */}
-              <div className="all-users-table-cell">
-                <span className="text-dark-400 text-base">
+                {/* Books Borrowed */}
+                <TableCell className="text-center py-5 text-dark-400 text-base">
                   {user.booksBorrowed}
-                </span>
-              </div>
+                </TableCell>
 
-              {/* University ID */}
-              <div className="all-users-table-cell">
-                <span className="text-dark-400 text-base">
+                {/* University ID */}
+                <TableCell className="text-center py-5 text-dark-400 text-base">
                   {user.universityId}
-                </span>
-              </div>
+                </TableCell>
 
-              {/* ID Card */}
-              <div className="all-users-table-cell">
-                <button className="text-blue-600 hover:underline flex items-center text-sm gap-1">
-                  View ID Card
-                  <ExternalLink className="w-4 h-4" />
-                </button>
-              </div>
+                {/* ID Card */}
+                <TableCell className="text-center py-5">
+                  <button className="text-blue-600 hover:underline inline-flex items-center text-sm gap-1">
+                    View ID Card
+                    <ExternalLink className="w-4 h-4" />
+                  </button>
+                </TableCell>
 
-              {/* Action */}
-              <div className="all-users-table-cell">
-                <button className="p-2 rounded-md hover:bg-red-50">
-                  <Trash2 className="w-4 h-4 text-red-500" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+                {/* Delete Action */}
+                <TableCell className="text-center py-5">
+                  <button className="p-2 rounded-md hover:bg-red-50 transition-colors">
+                    <Trash2 className="w-5 h-5 text-red-500" />
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
