@@ -17,7 +17,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { ChevronDown, X, Check, AlertCircle, ExternalLink, XCircle } from "lucide-react";
+import { ChevronDown, X, Check, AlertCircle, ExternalLink, XCircle, CheckCircle } from "lucide-react";
 
 const AccountRequestsPage = () => {
   const [requests] = useState([
@@ -93,7 +93,7 @@ const AccountRequestsPage = () => {
       </div>
 
       {/* Styled Table Container */}
-      <div className="overflow-hidden hidden lg:flex rounded-3xl border border-gray-200 shadow-sm">
+      <div className="overflow-hidden hidden xl:flex rounded-3xl border border-gray-200 shadow-sm">
         <Table>
           <TableHeader>
             <TableRow className="bg-[#f7f8ff] hover:bg-[#f7f8ff]">
@@ -165,15 +165,17 @@ const AccountRequestsPage = () => {
                   <div className="flex items-center gap-2 justify-center">
                     <button
                       onClick={() => handleApprove(request)}
-                      className="px-3 py-2 text-sm rounded-md font-semibold text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
+                      className="px-3 py-2 text-sm rounded-3xl font-semibold text-green-700 bg-green-200 hover:bg-green-300 transition-colors"
                     >
+                      <CheckCircle className="w-5 h-5 inline-block mr-1" />
                       Approve Account
                     </button>
                     <button
                       onClick={() => handleDeny(request)}
-                      className="p-2 rounded-md text-red-600 hover:bg-red-100 transition-colors"
+                      className="flex items-center p-2 rounded-3xl font-semibold text-sm text-red-600 bg-red-200 hover:bg-red-300 transition-colors"
                     >
-                      <XCircle className="w-5 h-5" />
+                      <XCircle className="w-5 h-5 inline-block mr-1" />
+                      Deny Request
                     </button>
                   </div>
                 </TableCell>
@@ -184,58 +186,77 @@ const AccountRequestsPage = () => {
       </div>
 
       {/* Mobile Cards */}
-      <div className="space-y-4 lg:hidden">
+      <div className="space-y-5 xl:hidden">
         {requests.map((request) => (
-          <Card key={request.id} className="border border-gray-200 shadow-sm">
-            <CardHeader>
+          <Card
+            key={request.id}
+            className="rounded-2xl overflow-hidden shadow-md border border-gray-200"
+          >
+            {/* Light Gradient Header */}
+            <CardHeader className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 p-4">
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm ${request.bgColor}`}
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm bg-blue-400`}
                 >
                   {request.initials}
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-semibold text-dark-400">
+                  <CardTitle className="text-lg font-bold text-gray-800">
                     {request.name}
                   </CardTitle>
-                  <p className="text-sm text-light-500">{request.email}</p>
+                  <p className="text-sm text-gray-600">{request.email}</p>
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
+
+            {/* Details */}
+            <CardContent className="bg-white p-4 space-y-3 text-sm">
               <p>
-                <span className="font-semibold text-gray-600">
+                <span className="font-semibold text-gray-700">
                   Date Joined:
                 </span>{" "}
                 {request.dateJoined}
               </p>
               <p>
-                <span className="font-semibold text-gray-600">
+                <span className="font-semibold text-gray-700">
                   University ID:
                 </span>{" "}
                 {request.universityId}
               </p>
               <p>
-                <span className="font-semibold text-gray-600">ID Card:</span>{" "}
+                <span className="font-semibold text-gray-700">ID Card:</span>{" "}
                 <button className="text-blue-600 hover:underline inline-flex items-center">
                   View ID Card
                   <ExternalLink className="w-4 h-4 ml-1" />
                 </button>
               </p>
             </CardContent>
-            <CardFooter className="flex justify-end gap-2">
-              <button
-                onClick={() => handleApprove(request)}
-                className="px-3 py-2 text-sm rounded-md font-semibold text-green-700 bg-green-100 hover:bg-green-200 transition-colors"
-              >
-                Approve
-              </button>
-              <button
-                onClick={() => handleDeny(request)}
-                className="p-2 rounded-md text-red-600 hover:bg-red-100 transition-colors"
-              >
-                <XCircle className="w-5 h-5" />
-              </button>
+
+            {/* Footer Buttons */}
+            <CardFooter className="flex justify-end gap-2 bg-gray-50 px-4 py-3 border-t">
+              <div className="flex w-full items-center gap-2 justify-center">
+                <button
+                  onClick={() => handleApprove(request)}
+                  className="px-3 w-full py-2 text-sm rounded-3xl font-semibold text-green-700 bg-green-200 hover:bg-green-300 transition-colors"
+                >
+                  <CheckCircle className="w-5 h-5 inline-block mr-1" />
+                  Approve Account
+                </button>
+                <button
+                  onClick={() => handleDeny(request)}
+                  className="px-3 w-full py-2 text-sm rounded-3xl font-semibold text-red-700 bg-red-200 hover:bg-red-300 transition-colors"
+                >
+                  <CheckCircle className="w-5 h-5 inline-block mr-1" />
+                  Approve Account
+                </button>
+                {/* <button
+                  onClick={() => handleDeny(request)}
+                  className="flex w-full items-center p-2 rounded-3xl font-semibold text-sm text-red-600 bg-red-200 hover:bg-red-300 transition-colors"
+                >
+                  <XCircle className="w-5 h-5 inline-block mr-1" />
+                  Deny Request
+                </button> */}
+              </div>
             </CardFooter>
           </Card>
         ))}
@@ -251,7 +272,7 @@ const AccountRequestsPage = () => {
 
             <div className="modal-icon-container bg-green-100">
               <div className="modal-icon-inner bg-approve-400">
-                <Check className="size-8 text-white" />
+                <CheckCircle className="size-8 text-white" />
               </div>
             </div>
 
