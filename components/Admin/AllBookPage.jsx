@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Edit, Trash2, Plus, AlertTriangle, X } from "lucide-react";
 import CreateBookPage from "./CreateBookPage";
 import EditBookPage from "./EditBookPage";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const AllBooksPage = () => {
   const [showCreateForm, setShowCreateForm] = useState(null);
@@ -32,7 +32,7 @@ const AllBooksPage = () => {
       genre: "Strategic, Fantasy",
       dateCreated: "Dec 19 2023",
       coverUrl:
-        "https://images.pexels.com/photos/1553575/pexels-photo-1553575.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
     },
     {
       id: "3",
@@ -59,7 +59,7 @@ const AllBooksPage = () => {
       genre: "Strategic, Fantasy",
       dateCreated: "Dec 19 2023",
       coverUrl:
-        "https://images.pexels.com/photos/1553575/pexels-photo-1553575.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
     },
     {
       id: "6",
@@ -81,11 +81,6 @@ const AllBooksPage = () => {
     },
   ];
 
-  const handleEditBook = (book) => {
-    setSelectedBook(book);
-    setShowEditForm(true);
-  };
-
   const handleDeleteBook = (book) => {
     setBookToDelete(book);
     setShowDeleteModal(true);
@@ -102,32 +97,6 @@ const AllBooksPage = () => {
     setShowDeleteModal(false);
     setBookToDelete(null);
   };
-
-  if (showCreateForm) {
-    return <CreateBookPage onGoBack={() => setShowCreateForm(false)} />;
-  }
-
-  if (showEditForm && selectedBook) {
-    return (
-      <EditBookPage
-        onGoBack={() => {
-          setShowEditForm(false);
-          setSelectedBook(null);
-        }}
-        bookData={{
-          id: selectedBook.id,
-          title: selectedBook.title,
-          author: selectedBook.author,
-          genre: selectedBook.genre,
-          totalBooks: "164",
-          coverUrl: selectedBook.coverUrl,
-          primaryColor: "#C4214C",
-          summary:
-            "People in Glass Houses by Jayne Castle (a pseudonym for Jayne Ann Krentz) is a science fiction romance set in a future world where people with psychic abilities live in harmony with advanced technology. The story follows the main characters, Harriet and Sam, who are drawn together under unusual circumstances.\n\nHarriet, a talented psychic, works for a company that offers psychic services in a futuristic society. When she finds herself tangled in a dangerous situation involving a mysterious conspiracy, she enlists the help of Sam, a former investigator with a dark past. As they uncover the secrets surrounding a glass house—a mysterious structure tied to their",
-        }}
-      />
-    );
-  }
 
   return (
     <>
@@ -153,7 +122,7 @@ const AllBooksPage = () => {
                 </svg>
               </div>
               <button
-                onClick={() => setShowCreateForm(true)}
+                onClick={() => router.push("/admin/all-books/add-book")}
                 className="all-books-create-btn"
               >
                 <Plus className="w-4 h-4" />
@@ -251,7 +220,7 @@ const AllBooksPage = () => {
             </button>
 
             <div className="modal-icon-container bg-red-100">
-              <div className="modal-icon-inner bg-red-500">
+              <div className="modal-icon-inner bg-[#F46F70]">
                 <AlertTriangle className="size-8 text-white" />
               </div>
             </div>
@@ -272,7 +241,7 @@ const AllBooksPage = () => {
               </button>
               <button
                 onClick={confirmDelete}
-                className="flex-1 py-3 px-4 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600 transition-colors duration-200"
+                className="flex-1 py-3 px-4 rounded-lg bg-[#F46F70] text-white font-medium hover:bg-red-600 transition-colors duration-200"
               >
                 Delete Book
               </button>
