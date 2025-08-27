@@ -77,14 +77,14 @@ const UserCard = ({ name, email, initials, bgColor }) => {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={handleApprove}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white bg-green-600 hover:bg-green-700 transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white bg-approve-400 hover:bg-green-800 transition-colors"
               >
                 <CheckCircle className="w-5 h-5" />
                 Approve
               </button>
               <button
                 onClick={handleDeny}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white bg-red-500 hover:bg-red-600 transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white bg-[#F46F70] hover:bg-red-600 transition-colors"
               >
                 <AlertCircle className="w-5 h-5" />
                 Deny

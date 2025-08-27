@@ -284,7 +284,7 @@ const AccountRequestsPage = () => {
 
             <button
               onClick={confirmApprove}
-              className="modal-confirm-btn bg-[#4C7B62] hover:bg-green-800"
+              className="modal-confirm-btn bg-approve-400 hover:bg-green-800"
             >
               Approve & Send Confirmation
             </button>
