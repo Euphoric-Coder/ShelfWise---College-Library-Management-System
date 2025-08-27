@@ -175,7 +175,7 @@
 
   /* Search */
   .admin-search {
-    @apply flex border border-gray-100 min-h-12 sm:min-h-14 items-center gap-1 rounded-md bg-light-600 px-4 w-full sm:max-w-md;
+    @apply flex border border-gray-100 min-h-12 sm:min-h-14 items-center gap-1 rounded-3xl bg-light-600 px-4 w-full sm:max-w-md;
   }
 
   .admin-search_input {
@@ -568,15 +568,6 @@
 .remove-file-btn {
   @apply p-1 text-gray-400 hover:text-gray-600 transition-colors duration-200;
 }
-
-/* Search */
-  .admin-search {
-    @apply flex border border-gray-100 min-h-12 sm:min-h-14 items-center gap-1 rounded-md bg-light-600 px-4 w-full sm:max-w-md;
-  }
-
-  .admin-search_input {
-    @apply w-full border-0 shadow-none bg-transparent outline-none focus:outline-none focus:ring-0 focus:border-0 !important;
-  }
 
 /* Search Results */
   .search-results-container {

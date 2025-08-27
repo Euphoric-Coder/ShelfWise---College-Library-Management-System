@@ -1,10 +1,13 @@
-import BookCard from '@/components/Admin/BookCard';
-import Header from '@/components/Admin/Header'
-import SectionHeader from '@/components/Admin/SectionHeader';
-import StatsCards from '@/components/Admin/StatsCard';
-import UserCard from '@/components/Admin/UserCard';
-import { Plus } from 'lucide-react';
-import React from 'react'
+"use client";
+
+import BookCard from "@/components/Admin/BookCard";
+import Header from "@/components/Admin/Header";
+import SectionHeader from "@/components/Admin/SectionHeader";
+import StatsCards from "@/components/Admin/StatsCard";
+import UserCard from "@/components/Admin/UserCard";
+import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 const page = () => {
   const borrowRequests = [
@@ -125,6 +128,8 @@ const page = () => {
       date: "12/01/24",
     },
   ];
+
+  const router = useRouter();
   return (
     <div>
       <>
@@ -135,7 +140,11 @@ const page = () => {
           <div className="space-y-10">
             {/* Borrow Requests */}
             <div className="borrow-requests-container">
-              <SectionHeader title="Borrow Requests" viewAllLink={true} redirectTo='/admin/borrow-requests'/>
+              <SectionHeader
+                title="Borrow Requests"
+                viewAllLink={true}
+                redirectTo="/admin/borrow-requests"
+              />
               <div className="borrow-requests-list">
                 {borrowRequests.map((book, index) => (
                   <BookCard
@@ -154,7 +163,11 @@ const page = () => {
 
             {/* Account Requests */}
             <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <SectionHeader title="Account Requests" viewAllLink={true} redirectTo='/admin/account-requests'/>
+              <SectionHeader
+                title="Account Requests"
+                viewAllLink={true}
+                redirectTo="/admin/account-requests"
+              />
               <div className="grid grid-cols-3 gap-4">
                 {accountRequests.map((user, index) => (
                   <UserCard
@@ -171,8 +184,12 @@ const page = () => {
 
           {/* Right Column - Recently Added Books */}
           <div className="borrow-requests-container">
-            <SectionHeader title="Recently Added Books" viewAllLink={true} redirectTo='/admin/all-books'/>
-            <div className="add-new-book_btn cursor-pointer hover:bg-light-400 transition-colors border border-gray-100 shadow-sm hover:shadow-md">
+            <SectionHeader
+              title="Recently Added Books"
+              viewAllLink={true}
+              redirectTo="/admin/all-books"
+            />
+            <div className="add-new-book_btn cursor-pointer hover:bg-light-400 transition-colors border border-gray-100 shadow-sm hover:shadow-md" onClick={() => router.push("/admin/all-books/add-book")}>
               <div>
                 <Plus className="size-6 text-primary-admin" />
               </div>
@@ -194,7 +211,7 @@ const page = () => {
                       By {book.author} • {book.genre}
                     </p>
                     <p className="text-light-500 text-xs">{book.date}</p>
-                </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -203,6 +220,6 @@ const page = () => {
       </>
     </div>
   );
-}
+};
 
-export default page
+export default page;
