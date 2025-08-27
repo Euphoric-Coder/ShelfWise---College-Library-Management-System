@@ -45,7 +45,7 @@ const BookCard = ({
 
       {showActions && (
         <button className="p-2 hover:bg-light-300 rounded-lg transition-colors duration-200">
-          <MoreVertical className="size-4 text-light-500" />
+          <MoreVertical className="text-light-500" />
         </button>
       )}
     </div>

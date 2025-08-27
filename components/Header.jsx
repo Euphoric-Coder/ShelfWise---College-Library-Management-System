@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 const Header = () => {
   const pathname = usePathname();
+  
   return (
     <header className="w-full my-10 flex justify-between gap-5">
       <Link href="/" className="flex items-center gap-2">

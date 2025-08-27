@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Header = ({ onSearch, searchQuery }) => {
   const [query, setQuery] = useState(searchQuery);
   const [isSearching, setIsSearching] = useState(false);
+  const pathname = usePathname();
+
+  console.log("Current Path:", pathname);
 
   // Mock data for search
   const mockUsers = [

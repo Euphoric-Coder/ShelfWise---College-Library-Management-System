@@ -1,7 +1,6 @@
 "use client";
 
 import BookCard from "@/components/Admin/BookCard";
-import Header from "@/components/Admin/Header";
 import SectionHeader from "@/components/Admin/SectionHeader";
 import StatsCards from "@/components/Admin/StatsCard";
 import UserCard from "@/components/Admin/UserCard";
