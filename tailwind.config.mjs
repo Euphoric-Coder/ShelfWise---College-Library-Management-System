@@ -110,7 +110,7 @@ export default {
           400: "#E27233",
           500: "#EF3A4B",
           800: "#EF3A4B",
-        }
+        },
       },
       screens: {
         xs: "480px",

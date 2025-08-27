@@ -51,7 +51,7 @@
 
   /* Home Page */
   .view-btn {
-    @apply bg-light-300 rounded-md text-primary-admin font-semibold hover:bg-light-300/80 shadow-none !important;
+    @apply bg-light-100 rounded-3xl text-primary-admin font-bold hover:bg-light-400 shadow-none !important;
   }
 
   .add-new-book_btn {
@@ -80,7 +80,7 @@
   }
 
   .stat-count {
-    @apply font-semibold text-2xl sm:text-3xl text-dark-400;
+    @apply font-extrabold text-2xl sm:text-3xl text-primary-admin;
   }
 
   /* Book Stripe */
