@@ -26,7 +26,7 @@ const layout = ({ children }) => {
   return (
     <div className="flex min-h-screen">
       <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
-      <div className="admin-container">
+      {/* <div className="admin-container">
         <Header onSearch={handleSearch} searchQuery={searchQuery} />
         {isSearching ? (
           <SearchResults
@@ -37,6 +37,9 @@ const layout = ({ children }) => {
         ) : (
           <>{children}</>
         )}
+      </div> */}
+      <div className="admin-container">
+        {children}
       </div>
     </div>
   );

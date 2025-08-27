@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { User, BookOpen, Users, Book, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -7,6 +7,10 @@ const SearchResults = ({ query, results, onClearSearch }) => {
   const bookResults = results.filter((result) => result.type === "book");
 
   const pathname = usePathname();
+
+  // if (pathname === "/admin/all-users") {
+  //   setUsers(userResults);
+  // }
 
   const groupBooksByAuthor = (books) => {
     const grouped = {};

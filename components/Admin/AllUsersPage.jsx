@@ -30,42 +30,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-const AllUsersPage = () => {
-  const [users, setUsers] = useState([
-    {
-      id: "1",
-      name: "Darrell Steward",
-      email: "darrellsteward@gmail.com",
-      dateJoined: "Dec 19 2023",
-      role: "User",
-      booksBorrowed: 10,
-      universityId: "90324423789",
-      initials: "DS",
-      bgColor: "bg-gray-600",
-    },
-    {
-      id: "2",
-      name: "Marc Atenson",
-      email: "marcinee@mial.com",
-      dateJoined: "Dec 19 2023",
-      role: "Admin",
-      booksBorrowed: 32,
-      universityId: "90324423789",
-      initials: "MA",
-      bgColor: "bg-green-500",
-    },
-    {
-      id: "3",
-      name: "Susan Drake",
-      email: "contact@susandrake.io",
-      dateJoined: "Dec 19 2023",
-      role: "User",
-      booksBorrowed: 13,
-      universityId: "90324423789",
-      initials: "SD",
-      bgColor: "bg-blue-400",
-    },
-  ]);
+const AllUsersPage = ({users, setUsers}) => {
 
   const handleRoleChange = (userId, newRole) => {
     setUsers((prev) =>

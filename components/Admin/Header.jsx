@@ -9,7 +9,41 @@ const Header = ({ onSearch, searchQuery }) => {
   const [isSearching, setIsSearching] = useState(false);
   const pathname = usePathname();
 
-  console.log("Current Path:", pathname);
+  const users = [
+    {
+      id: "1",
+      name: "Darrell Steward",
+      email: "darrellsteward@gmail.com",
+      dateJoined: "Dec 19 2023",
+      role: "User",
+      booksBorrowed: 10,
+      universityId: "90324423789",
+      initials: "DS",
+      bgColor: "bg-gray-600",
+    },
+    {
+      id: "2",
+      name: "Marc Atenson",
+      email: "marcinee@mial.com",
+      dateJoined: "Dec 19 2023",
+      role: "Admin",
+      booksBorrowed: 32,
+      universityId: "90324423789",
+      initials: "MA",
+      bgColor: "bg-green-500",
+    },
+    {
+      id: "3",
+      name: "Susan Drake",
+      email: "contact@susandrake.io",
+      dateJoined: "Dec 19 2023",
+      role: "User",
+      booksBorrowed: 13,
+      universityId: "90324423789",
+      initials: "SD",
+      bgColor: "bg-blue-400",
+    },
+  ];
 
   // Mock data for search
   const mockUsers = [
@@ -91,40 +125,53 @@ const Header = ({ onSearch, searchQuery }) => {
       const results = [];
       const lowerQuery = searchQuery.toLowerCase();
 
-      // Search users
-      mockUsers.forEach((user) => {
-        if (
-          user.name.toLowerCase().includes(lowerQuery) ||
-          user.email.toLowerCase().includes(lowerQuery)
-        ) {
-          results.push({
-            type: "user",
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            initials: user.initials,
-            bgColor: user.bgColor,
-          });
-        }
-      });
+      // When the route is "/admin"
+      if (pathname === "/admin") {
+        // Search users
+        mockUsers.forEach((user) => {
+          if (
+            user.name.toLowerCase().includes(lowerQuery) ||
+            user.email.toLowerCase().includes(lowerQuery)
+          ) {
+            results.push({
+              type: "user",
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              initials: user.initials,
+              bgColor: user.bgColor,
+            });
+          }
+        });
 
-      // Search books
-      mockBooks.forEach((book) => {
-        if (
-          book.title.toLowerCase().includes(lowerQuery) ||
-          book.author.toLowerCase().includes(lowerQuery) ||
-          book.genre.toLowerCase().includes(lowerQuery)
-        ) {
-          results.push({
-            type: "book",
-            id: book.id,
-            title: book.title,
-            author: book.author,
-            genre: book.genre,
-            coverUrl: book.coverUrl,
-          });
-        }
-      });
+        // Search books
+        mockBooks.forEach((book) => {
+          if (
+            book.title.toLowerCase().includes(lowerQuery) ||
+            book.author.toLowerCase().includes(lowerQuery) ||
+            book.genre.toLowerCase().includes(lowerQuery)
+          ) {
+            results.push({
+              type: "book",
+              id: book.id,
+              title: book.title,
+              author: book.author,
+              genre: book.genre,
+              coverUrl: book.coverUrl,
+            });
+          }
+        });
+      }
+      if (pathname.includes("/admin/all-users")) {
+        users.forEach((user) => {
+          if (
+            user.name.toLowerCase().includes(lowerQuery) ||
+            user.email.toLowerCase().includes(lowerQuery)
+          ) {
+            results.push(user);
+          }
+        });
+      }
 
       onSearch(searchQuery, results);
       setIsSearching(false);
