@@ -66,28 +66,30 @@ const Page = () => {
       {/* Header with search bar */}
       <Header onSearch={handleSearch} searchQuery={searchQuery} />
 
-      <div className="search-results-header">
-        <div className="flex items-center gap-3">
-          <div className="search-results-icon">
-            <Search className="size-5 text-primary-admin" />
+      {searchQuery !== "" && (
+        <div className="search-results-header">
+          <div className="flex items-center gap-3">
+            <div className="search-results-icon">
+              <Search className="size-5 text-primary-admin" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-dark-400">
+                Search Results for "{searchQuery}"
+              </h2>
+              <p className="text-sm text-light-500 mt-1">
+                Found {searchResults.length} result
+                {searchResults.length !== 1 ? "s" : ""} across users and books
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-semibold text-dark-400">
-              Search Results for "{searchQuery}"
-            </h2>
-            <p className="text-sm text-light-500 mt-1">
-              Found {searchResults.length} result
-              {searchResults.length !== 1 ? "s" : ""} across users and books
-            </p>
-          </div>
+          <button
+            onClick={() => handleClearSearch()}
+            className="search-clear-btn"
+          >
+            Clear Search
+          </button>
         </div>
-        <button
-          onClick={() => handleClearSearch()}
-          className="search-clear-btn"
-        >
-          Clear Search
-        </button>
-      </div>
+      )}
 
       {/* If no results found */}
       {noResults ? (

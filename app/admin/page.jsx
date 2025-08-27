@@ -140,7 +140,7 @@ const page = () => {
             {/* Borrow Requests */}
             <div className="borrow-requests-container">
               <SectionHeader
-                title="Borrow Requests"
+                title="Recent Book Activity"
                 viewAllLink={true}
                 redirectTo="/admin/borrow-requests"
               />
