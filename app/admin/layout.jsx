@@ -13,7 +13,7 @@ const layout = ({ children }) => {
       <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
       <div className="admin-container">
         <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        {!searchTerm && <>{children}</>}
+        {searchTerm ? <>Testing it out</> : <>{children}</>}
       </div>
     </div>
   );

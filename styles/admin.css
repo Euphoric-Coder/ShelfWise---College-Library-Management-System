@@ -480,7 +480,7 @@
 }
 
 .modal-content {
-  @apply bg-white rounded-xl p-6 sm:p-8 max-w-md w-full relative text-center;
+  @apply bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative text-center;
 }
 
 .modal-close-btn {
