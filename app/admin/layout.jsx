@@ -6,6 +6,7 @@ import "@/styles/admin.css";
 import Header from "@/components/Admin/Header";
 import SearchResults from "@/components/Admin/Search";
 import { usePathname } from "next/navigation";
+import MobileNavbar from "@/components/Admin/MobileNavbar";
 
 const layout = ({ children }) => {
   const [currentPage, setCurrentPage] = useState("home");
@@ -27,24 +28,36 @@ const layout = ({ children }) => {
     setIsSearching(false);
   };
   return (
-    <div className="flex min-h-screen">
-      <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
-      {pathname === "/admin" ? (
-        <div className="admin-container">
-          <Header onSearch={handleSearch} searchQuery={searchQuery} />
-          {isSearching ? (
-            <SearchResults
-              query={searchQuery}
-              results={searchResults}
-              onClearSearch={handleClearSearch}
-            />
-          ) : (
-            <>{children}</>
-          )}
-        </div>
-      ) : (
-        <div className="admin-container">{children}</div>
-      )}
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:flex">
+        <Sidebar currentPage={currentPage} onPageChange={setCurrentPage} />
+      </div>
+
+      {/* Mobile Navbar */}
+      <div className="flex lg:hidden">
+        <MobileNavbar />
+      </div>
+
+      {/* Main Content */}
+      <div className="admin-container">
+        {pathname === "/admin" ? (
+          <>
+            <Header onSearch={handleSearch} searchQuery={searchQuery} />
+            {isSearching ? (
+              <SearchResults
+                query={searchQuery}
+                results={searchResults}
+                onClearSearch={handleClearSearch}
+              />
+            ) : (
+              children
+            )}
+          </>
+        ) : (
+          children
+        )}
+      </div>
     </div>
   );
 };

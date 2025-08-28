@@ -195,7 +195,7 @@ const Header = ({ onSearch, searchQuery }) => {
 
   return (
     <div className="admin-header">
-      <div className="lg:ml-0 ml-16">
+      <div className="lg:ml-0">
         <h1 className="text-2xl font-semibold text-dark-400 mb-2">
           Welcome, Adrian
         </h1>

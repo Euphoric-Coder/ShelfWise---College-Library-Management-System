@@ -33,7 +33,7 @@ const Sidebar = () => {
           <div className="size-8 bg-primary-admin rounded-lg flex items-center justify-center">
             <BookOpen className="size-5 text-white" />
           </div>
-          <h1 className="text-xl font-bold text-dark-400">BookWise</h1>
+          <h1 className="text-xl font-bold text-dark-400">Shelf Wise</h1>
         </div>
 
         {/* Navigation */}
@@ -47,9 +47,9 @@ const Sidebar = () => {
               <Link
                 key={index}
                 href={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
+                className={`flex text-lg items-center gap-3 px-4 py-3 rounded-3xl transition-colors cursor-pointer ${
                   isActive
-                    ? "bg-primary-admin text-white"
+                    ? "bg-primary-admin text-white font-bold"
                     : "text-light-500 hover:bg-light-300"
                 }`}
               >

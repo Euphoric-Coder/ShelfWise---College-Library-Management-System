@@ -2,17 +2,20 @@
 
 import React, { useState } from "react";
 import { X, CheckCircle, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 
 const UserCard = ({ name, email, initials, bgColor }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleApprove = () => {
     console.log({ name, email, status: "approved" });
+    toast.success(`User "${name}" approved!`);
     setIsOpen(false);
   };
 
   const handleDeny = () => {
     console.log({ name, email, status: "denied" });
+    toast.error(`User "${name}" denied!`);
     setIsOpen(false);
   };
 
