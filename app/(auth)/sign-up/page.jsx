@@ -1,8 +1,8 @@
 "use client";
 
 import Auth from "@/components/Auth";
+import { signUpSchema } from "@/lib/dataValidation";
 // import { signUp } from "@/lib/actions/auth";
-import { signUpSchema } from "@/lib/schema";
 
 const Page = () => (
   <Auth

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { signInSchema } from "@/lib/schema";
 import Auth from "@/components/Auth";
+import { signInSchema } from "@/lib/dataValidation";
 // import { signInWithCredentials } from "@/lib/actions/auth";
 
 const Page = () => (
