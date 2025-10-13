@@ -55,6 +55,19 @@ const handler = NextAuth({
       return session;
     },
   },
+  cookies: {
+    sessionToken: {
+      name: "__Secure-next-auth.session-token-shelfwise",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };
