@@ -40,6 +40,7 @@ const FileUpload = ({
   folder,
   variant,
   onFileChange,
+  setFileId,
 }) => {
   const ikUploadRef = useRef(null);
   const [file, setFile] = useState(null);
@@ -62,7 +63,8 @@ const FileUpload = ({
 
   const onSuccess = (res) => {
     setFile(res);
-    onFileChange(res.filePath);
+    onFileChange(res.url);
+    setFileId(res.fileId);
     toast.success(`Successfully uploaded ${type}.`);
   };
 

@@ -18,10 +18,14 @@ import { FIELD_NAMES, FIELD_TYPES } from "@/lib/data";
 import FileUpload from "@/components/FileUpload";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { file } from "zod";
+import { useState } from "react";
 
 const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   const router = useRouter();
   const isSignIn = type === "SIGN_IN";
+
+  const [fileId, setFileId] = useState(null);
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -29,15 +33,17 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   });
 
   const handleSubmit = async (data) => {
-    const result = await onSubmit(data);
+    console.log("Form Data:", { ...data, universityCardId: fileId });
 
-    if (result.success) {
-      toast.success(`You have successfully ${isSignIn ? "signed in" : "signed up"}.`);
+    // const result = await onSubmit(data);
 
-      router.push("/");
-    } else {
-      toast.error(result.error ?? "An error occurred.");
-    }
+    // if (result.success) {
+    //   toast.success(`You have successfully ${isSignIn ? "signed in" : "signed up"}.`);
+
+    //   router.push("/");
+    // } else {
+    //   toast.error(result.error ?? "An error occurred.");
+    // }
   };
 
   return (
@@ -73,6 +79,7 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
                         placeholder="Upload your ID"
                         folder="ids"
                         variant="dark"
+                        setFileId={setFileId}
                         onFileChange={field.onChange}
                       />
                     ) : (
