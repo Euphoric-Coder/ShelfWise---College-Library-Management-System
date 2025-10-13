@@ -2,7 +2,7 @@
 
 import Auth from "@/components/Auth";
 // import { signUp } from "@/lib/actions/auth";
-import { signUpSchema } from "@/lib/signInSchema";
+import { signUpSchema } from "@/lib/schema";
 
 const Page = () => (
   <Auth

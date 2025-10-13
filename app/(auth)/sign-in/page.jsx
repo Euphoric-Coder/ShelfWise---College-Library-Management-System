@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { signInSchema } from "@/lib/signInSchema";
+import { signInSchema } from "@/lib/schema";
 import Auth from "@/components/Auth";
 // import { signInWithCredentials } from "@/lib/actions/auth";
 
