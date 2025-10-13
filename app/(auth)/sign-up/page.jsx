@@ -2,7 +2,7 @@
 
 import Auth from "@/components/Auth";
 import { signUpSchema } from "@/lib/dataValidation";
-import { signUp } from "@/lib/signUp";
+import { signUp } from "@/lib/Authenticate";
 
 const Page = () => (
   <Auth
@@ -15,6 +15,7 @@ const Page = () => (
       universityId: 0,
       universityCard: "",
     }}
+    onSubmit={signUp}
   />
 );
 

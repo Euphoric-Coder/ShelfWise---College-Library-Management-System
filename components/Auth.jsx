@@ -20,9 +20,9 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { file } from "zod";
 import { useState } from "react";
-import { signUp } from "@/lib/signUp";
+import { signUp } from "@/lib/Authenticate";
 
-const Auth = ({ type, schema, defaultValues }) => {
+const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   const router = useRouter();
   const isSignIn = type === "SIGN_IN";
 
@@ -36,7 +36,7 @@ const Auth = ({ type, schema, defaultValues }) => {
   const handleSubmit = async (data) => {
     console.log("Form Data:", { ...data, universityCardId: fileId });
 
-    const result = await signUp({ ...data, universityCardId: fileId });
+    const result = await onSubmit({ ...data, universityCardId: fileId });
 
     if (result.success) {
       toast.success(

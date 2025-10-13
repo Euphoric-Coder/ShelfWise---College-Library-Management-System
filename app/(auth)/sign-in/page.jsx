@@ -3,7 +3,7 @@
 import React from "react";
 import Auth from "@/components/Auth";
 import { signInSchema } from "@/lib/dataValidation";
-// import { signInWithCredentials } from "@/lib/actions/auth";
+import { signInWithCredentials } from "@/lib/Authenticate";
 
 const Page = () => (
   <Auth
@@ -13,7 +13,7 @@ const Page = () => (
       email: "",
       password: "",
     }}
-    // onSubmit={signInWithCredentials}
+    onSubmit={signInWithCredentials}
   />
 );
 
