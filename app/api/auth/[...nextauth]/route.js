@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/dbConfig";
-import { Users } from "@/lib/schema";
+import { users } from "@/lib/schema";
 
 const handler = NextAuth({
   session: { strategy: "jwt" },
@@ -19,8 +19,8 @@ const handler = NextAuth({
 
         const result = await db
           .select()
-          .from(Users)
-          .where(eq(Users.email, credentials.email))
+          .from(users)
+          .where(eq(users.email, credentials.email))
           .limit(1);
 
         if (result.length === 0) return null;

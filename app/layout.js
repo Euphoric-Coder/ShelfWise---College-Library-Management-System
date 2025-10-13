@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import localFont from "next/font/local";
+import Providers from "./provider";
 
 const ibmPlexSans = localFont({
   src: [
@@ -55,7 +56,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
         <Toaster richColors />
       </body>
     </html>

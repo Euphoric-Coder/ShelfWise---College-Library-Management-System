@@ -20,8 +20,9 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { file } from "zod";
 import { useState } from "react";
+import { signUp } from "@/lib/signUp";
 
-const Auth = ({ type, schema, defaultValues, onSubmit }) => {
+const Auth = ({ type, schema, defaultValues }) => {
   const router = useRouter();
   const isSignIn = type === "SIGN_IN";
 
@@ -35,15 +36,17 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   const handleSubmit = async (data) => {
     console.log("Form Data:", { ...data, universityCardId: fileId });
 
-    // const result = await onSubmit(data);
+    const result = await signUp({ ...data, universityCardId: fileId });
 
-    // if (result.success) {
-    //   toast.success(`You have successfully ${isSignIn ? "signed in" : "signed up"}.`);
+    if (result.success) {
+      toast.success(
+        `You have successfully ${isSignIn ? "signed in" : "signed up"}.`
+      );
 
-    //   router.push("/");
-    // } else {
-    //   toast.error(result.error ?? "An error occurred.");
-    // }
+      router.push("/");
+    } else {
+      toast.error(result.error ?? "An error occurred.");
+    }
   };
 
   return (
