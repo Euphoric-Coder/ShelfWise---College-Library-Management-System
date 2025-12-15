@@ -26,7 +26,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="admin-sidebar w-64 flex flex-col justify-between">
+    <div className="admin-sidebar w-68 flex flex-col justify-between">
       {/* Top section */}
       <div>
         <div className="logo flex items-center gap-3 p-4">

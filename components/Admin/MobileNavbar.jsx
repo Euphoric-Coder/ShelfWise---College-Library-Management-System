@@ -49,7 +49,7 @@ const MobileNavbar = () => {
               <div className="size-8 bg-primary-admin rounded-lg flex items-center justify-center">
                 <BookOpen className="size-5 text-white" />
               </div>
-              <span className="font-bold text-lg text-dark-400">BookWise</span>
+              <span className="font-bold text-lg text-dark-400">ShelfWise</span>
             </SheetTitle>
           </SheetHeader>
 
