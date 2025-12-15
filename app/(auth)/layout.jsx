@@ -1,6 +1,6 @@
 import Image from "next/image";
 // import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 const Layout = async ({ children }) => {
   //   const session = await auth();

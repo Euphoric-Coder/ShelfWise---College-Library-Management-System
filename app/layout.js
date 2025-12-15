@@ -3,6 +3,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import localFont from "next/font/local";
 import Providers from "./provider";
+import SessionWatcher from "@/components/SessionWatcher";
 
 const ibmPlexSans = localFont({
   src: [
@@ -56,7 +57,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <SessionWatcher />
+        </Providers>
         <Toaster richColors />
       </body>
     </html>

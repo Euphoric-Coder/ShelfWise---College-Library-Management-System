@@ -16,17 +16,30 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/lib/data";
 import FileUpload from "@/components/FileUpload";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { file } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signUp } from "@/lib/Authenticate";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { AlertTriangle } from "lucide-react";
 
 const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const isSignIn = type === "SIGN_IN";
 
   const [fileId, setFileId] = useState(null);
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  // Check for session expired query
+  useEffect(() => {
+    const expired = searchParams.get("expired");
+    if (expired === "true") {
+      setShowAlert(true);
+    }
+  }, [searchParams]);
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -59,6 +72,31 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
           ? "Access the vast collection of resources, and stay updated"
           : "Please complete all fields and upload a valid university ID to gain access to the library"}
       </p>
+
+      {/* Session Expired Alert */}
+      {showAlert && type === "SIGN_IN" && (
+        // TODO: Light and Dark mode theme
+        // <Alert className="mb-6 border-yellow-400 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:border-yellow-800 dark:text-yellow-100">
+        //   <AlertTriangle className="h-5 w-5 text-yellow-500 dark:text-yellow-300" />
+        //   <div>
+        //     <AlertTitle>Session Expired</AlertTitle>
+        //     <AlertDescription>
+        //       Your session has expired. Please sign in again to continue.
+        //     </AlertDescription>
+        //   </div>
+        // </Alert>
+
+        <Alert className="mb-6 border-yellow-800 bg-yellow-950 text-yellow-100">
+          <AlertTriangle className="h-5 w-5 !text-yellow-300" />
+          <div>
+            <AlertTitle>Session Expired</AlertTitle>
+            <AlertDescription>
+              Your session has expired. Please sign in again to continue.
+            </AlertDescription>
+          </div>
+        </Alert>
+      )}
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
