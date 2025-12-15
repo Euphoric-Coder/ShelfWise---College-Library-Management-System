@@ -10,6 +10,12 @@ import {
   Upload,
   X,
   Check,
+  Library,
+  Search,
+  Smartphone,
+  Zap,
+  Star,
+  Lightbulb,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -129,7 +135,7 @@ const AdminSignup = ({ onSignup }) => {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
-                    className="w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-3xl text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-[3px] focus:ring-primary-admin focus:border-transparent transition-all duration-200"
                     required
                   />
                 </div>
@@ -150,7 +156,7 @@ const AdminSignup = ({ onSignup }) => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your email"
-                    className="w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-3xl text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-[3px] focus:ring-primary-admin focus:border-transparent transition-all duration-200"
                     required
                   />
                 </div>
@@ -171,7 +177,7 @@ const AdminSignup = ({ onSignup }) => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="Enter your phone number"
-                    className="w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-3xl text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-[3px] focus:ring-primary-admin focus:border-transparent transition-all duration-200"
                     required
                   />
                 </div>
@@ -183,7 +189,7 @@ const AdminSignup = ({ onSignup }) => {
                   University ID Card
                 </label>
                 {idCardFile ? (
-                  <div className="flex items-center justify-between p-3 border border-gray-200 rounded-lg bg-blue-50">
+                  <div className="flex items-center justify-between p-3 border border-gray-200 rounded-3xl bg-blue-50">
                     <div className="flex items-center gap-2">
                       <div className="text-blue-600">📄</div>
                       <span className="text-blue-600 font-medium text-sm truncate">
@@ -199,7 +205,7 @@ const AdminSignup = ({ onSignup }) => {
                     </button>
                   </div>
                 ) : (
-                  <label className="w-full p-4 border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-gray-300 transition-colors duration-200 cursor-pointer">
+                  <label className="w-full p-4 border-2 border-dashed border-gray-200 rounded-3xl flex flex-col items-center justify-center gap-2 hover:border-gray-300 transition-colors duration-200 cursor-pointer">
                     <Upload className="w-5 h-5 text-gray-400" />
                     <span className="text-gray-500 text-sm">
                       Upload your ID card
@@ -231,7 +237,7 @@ const AdminSignup = ({ onSignup }) => {
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder="Create a password"
-                    className="w-full pl-10 pr-10 py-2.5 border border-gray-200 rounded-lg text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200"
+                    className="w-full pl-10 pr-10 py-2.5 border border-gray-200 rounded-3xl text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-[3px] focus:ring-primary-admin focus:border-transparent transition-all duration-200"
                     required
                   />
                   <button
@@ -291,7 +297,7 @@ const AdminSignup = ({ onSignup }) => {
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     placeholder="Confirm your password"
-                    className={`w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200 ${
+                    className={`w-full pl-10 pr-10 py-2.5 border rounded-3xl text-sm text-dark-400 placeholder-light-500 focus:outline-none focus:ring-[3px] focus:ring-primary-admin focus:border-transparent transition-all duration-200 ${
                       formData.confirmPassword && !passwordsMatch
                         ? "border-red-300"
                         : "border-gray-200"
@@ -323,13 +329,17 @@ const AdminSignup = ({ onSignup }) => {
               {/* Terms and Conditions */}
               <div className="flex items-start">
                 <input
+                  id="tc"
                   type="checkbox"
                   checked={agreeToTerms}
                   onChange={(e) => setAgreeToTerms(e.target.checked)}
-                  className="w-4 h-4 text-primary-admin bg-gray-100 border-gray-300 rounded focus:ring-primary-admin focus:ring-2 mt-0.5"
+                  className="w-4 h-4 accent-primary-admin text-primary-admin bg-gray-100 border-gray-300 rounded focus:ring-primary-admin focus:ring-2 mt-0.5"
                   required
                 />
-                <span className="ml-2 text-xs text-dark-400">
+                <span
+                  onClick={() => setAgreeToTerms(!agreeToTerms)}
+                  className="ml-2 text-xs text-dark-400 cursor-pointer select-none"
+                >
                   I agree to the{" "}
                   <button
                     type="button"
@@ -382,93 +392,97 @@ const AdminSignup = ({ onSignup }) => {
 
       {/* Right Side - Library Image */}
       <div className="hidden lg:flex flex-1 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-admin/95 via-purple-600/80 to-indigo-900/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-admin/90 via-blue-600/85 to-purple-900/90"></div>
         <img
-          src="https://images.pexels.com/photos/481516/pexels-photo-481516.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=1200"
           alt="Library"
           className="w-full h-full object-cover"
         />
 
-        {/* Animated Background Elements */}
-        <div className="absolute top-16 left-16 w-24 h-24 bg-white/10 rounded-full backdrop-blur-sm animate-bounce"></div>
-        <div className="absolute bottom-32 right-16 w-20 h-20 bg-white/5 rounded-full backdrop-blur-sm animate-pulse delay-700"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/15 rounded-full backdrop-blur-sm animate-pulse delay-300"></div>
-        <div className="absolute top-1/4 right-1/3 w-14 h-14 bg-white/8 rounded-full backdrop-blur-sm animate-pulse delay-1000"></div>
+        {/* Floating Elements */}
+        <div className="absolute top-20 right-20 w-16 h-16 bg-white/10 rounded-2xl backdrop-blur-sm animate-pulse rotate-12"></div>
+        <div className="absolute bottom-40 left-16 w-12 h-12 bg-white/15 rounded-full backdrop-blur-sm animate-bounce delay-500"></div>
+        <div className="absolute top-1/3 left-1/3 w-8 h-8 bg-white/20 rounded-lg backdrop-blur-sm animate-pulse delay-1000 rotate-45"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-10 h-10 bg-white/12 rounded-full backdrop-blur-sm animate-pulse delay-700"></div>
 
         <div className="absolute inset-0 flex items-center justify-center p-12">
           <div className="text-center text-white">
-            <div className="mb-12">
-              <div className="size-28 bg-gradient-to-br from-white/25 to-white/15 rounded-3xl flex items-center justify-center mx-auto mb-8 backdrop-blur-md border border-white/30 shadow-2xl">
-                <BookOpen className="size-10 text-white" />
+            <div className="mb-10">
+              <div className="size-20 bg-gradient-to-br from-white/30 to-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 backdrop-blur-md border border-white/25 shadow-2xl">
+                <BookOpen className="size-8 text-white" />
               </div>
-              <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/90 bg-clip-text text-transparent">
-                Welcome to ShelfWise
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-white/95 bg-clip-text text-transparent">
+                Join ShelfWise
               </h2>
-              <p className="text-xl text-white/90 leading-relaxed max-w-lg mx-auto">
-                Join our digital library management system and discover a world
-                of knowledge at your fingertips.
+              <p className="text-lg text-white/90 leading-relaxed max-w-md mx-auto">
+                Create your account and unlock access to thousands of books and
+                advanced library features.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 max-w-md mx-auto">
-              <div className="bg-white/15 backdrop-blur-md rounded-xl p-6 text-left border border-white/20 shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:rotate-1">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-white/30 to-white/20 rounded-xl flex items-center justify-center shadow-lg">
-                    <span className="text-2xl">📚</span>
+            <div className="grid grid-cols-1 gap-4 max-w-sm mx-auto">
+              <div className="bg-white/15 backdrop-blur-md rounded-xl p-5 text-left border border-white/20 shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-white/30 to-white/20 rounded-lg flex items-center justify-center shadow-lg">
+                    <Library className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg">Vast Collection</h3>
+                  <h3 className="font-bold">Vast Collection</h3>
                 </div>
-                <p className="text-white/80 leading-relaxed">
-                  Access thousands of books across all genres and categories
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Access thousands of books across all genres
                 </p>
               </div>
 
-              <div className="bg-white/15 backdrop-blur-md rounded-xl p-6 text-left border border-white/20 shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:-rotate-1">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-white/30 to-white/20 rounded-xl flex items-center justify-center shadow-lg">
-                    <span className="text-2xl">🔍</span>
+              <div className="bg-white/15 backdrop-blur-md rounded-xl p-5 text-left border border-white/20 shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-white/30 to-white/20 rounded-lg flex items-center justify-center shadow-lg">
+                    <Search className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg">Smart Search</h3>
+                  <h3 className="font-bold">Smart Search</h3>
                 </div>
-                <p className="text-white/80 leading-relaxed">
-                  Find books by title, author, or genre with intelligent search
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Find books instantly with intelligent search
                 </p>
               </div>
 
-              <div className="bg-white/15 backdrop-blur-md rounded-xl p-6 text-left border border-white/20 shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:rotate-1">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-white/30 to-white/20 rounded-xl flex items-center justify-center shadow-lg">
-                    <span className="text-2xl">📱</span>
+              <div className="bg-white/15 backdrop-blur-md rounded-xl p-5 text-left border border-white/20 shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-gradient-to-br from-white/30 to-white/20 rounded-lg flex items-center justify-center shadow-lg">
+                    <Smartphone className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="font-bold text-lg">Digital Management</h3>
+                  <h3 className="font-bold">Digital Access</h3>
                 </div>
-                <p className="text-white/80 leading-relaxed">
-                  Manage your library with cutting-edge digital tools
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Manage your reading with digital tools
                 </p>
               </div>
             </div>
 
-            {/* Feature Highlights */}
-            <div className="mt-12 flex justify-center gap-12">
-              <div className="text-center group">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-white/30 transition-all duration-300">
-                  <span className="text-2xl">🚀</span>
+            {/* Bottom Features */}
+            <div className="mt-8 flex justify-center gap-8">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-2 backdrop-blur-sm">
+                  <Zap className="w-6 h-6 text-white" />
                 </div>
-                <div className="text-white/90 font-medium">Fast & Secure</div>
-              </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-white/30 transition-all duration-300">
-                  <span className="text-2xl">🌟</span>
-                </div>
-                <div className="text-white/90 font-medium">
-                  Premium Experience
+                <div className="text-white/90 text-sm font-medium">
+                  Fast & Secure
                 </div>
               </div>
-              <div className="text-center group">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-white/30 transition-all duration-300">
-                  <span className="text-2xl">💡</span>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-2 backdrop-blur-sm">
+                  <Star className="w-6 h-6 text-white" />
                 </div>
-                <div className="text-white/90 font-medium">Smart Features</div>
+                <div className="text-white/90 text-sm font-medium">
+                  Premium Quality
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-2 backdrop-blur-sm">
+                  <Lightbulb className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-white/90 text-sm font-medium">
+                  Smart Features
+                </div>
               </div>
             </div>
           </div>
