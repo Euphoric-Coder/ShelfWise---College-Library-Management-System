@@ -3,20 +3,23 @@
 import Auth from "@/components/Auth";
 import { signUpSchema } from "@/lib/dataValidation";
 import { signUp } from "@/lib/Authenticate";
+import { Suspense } from "react";
 
 const Page = () => (
-  <Auth
-    type="SIGN_UP"
-    schema={signUpSchema}
-    defaultValues={{
-      email: "",
-      password: "",
-      fullName: "",
-      universityId: 0,
-      universityCard: "",
-    }}
-    onSubmit={signUp}
-  />
+  <Suspense fallback={<></>}>
+    <Auth
+      type="SIGN_UP"
+      schema={signUpSchema}
+      defaultValues={{
+        email: "",
+        password: "",
+        fullName: "",
+        universityId: 0,
+        universityCard: "",
+      }}
+      onSubmit={signUp}
+    />
+  </Suspense>
 );
 
 export default Page;
