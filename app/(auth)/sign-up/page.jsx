@@ -3,6 +3,7 @@
 import Auth from "@/components/Auth";
 import { signUpSchema } from "@/lib/dataValidation";
 import { signUp } from "@/lib/Authenticate";
+import { Suspense } from "react";
 
 const Page = () => (
   <Suspense fallback={<></>}>
