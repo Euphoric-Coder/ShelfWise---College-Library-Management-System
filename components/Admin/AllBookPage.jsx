@@ -1,80 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Edit, Trash2, Plus, AlertTriangle, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { format } from "date-fns";
 
 const AllBooksPage = () => {
+  const [books, setBooks] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(null);
   const [bookToDelete, setBookToDelete] = useState(null);
 
-  const router = useRouter();
+  useEffect(() => {
+    async function loadBooks() {
+      try {
+        const res = await fetch("/api/admin/books");
+        const data = await res.json();
+        setBooks(data); // ← update state
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    }
 
-  const books = [
-    {
-      id: "1",
-      title: "The Great Reclamation: A Novel by",
-      author: "Rachel Hxeng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-    {
-      id: "2",
-      title: "Inside Evil: Inside Evil Series, Book 1",
-      author: "Rachel Heng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-    {
-      id: "3",
-      title: "Jayne Castle - People in Glass Houses",
-      author: "Rachel Heng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-    {
-      id: "4",
-      title: "The Great Reclamation: A Novel by",
-      author: "Rachel Heng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-    {
-      id: "5",
-      title: "Inside Evil: Inside Evil Series, Book 1",
-      author: "Rachel Heng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-    {
-      id: "6",
-      title: "Jayne Castle - People in Glass Houses",
-      author: "Rachel Heng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-    {
-      id: "7",
-      title: "The Great Reclamation: A Novel by",
-      author: "Rachel Heng",
-      genre: "Strategic, Fantasy",
-      dateCreated: "Dec 19 2023",
-      coverUrl:
-        "https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-  ];
+    loadBooks();
+  }, []);
+
+  const router = useRouter();
 
   const handleDeleteBook = (book) => {
     setBookToDelete(book);
@@ -177,7 +127,7 @@ const AllBooksPage = () => {
 
                   <div className="all-books-table-cell">
                     <span className="text-dark-400 text-base">
-                      {book.dateCreated}
+                      {format(book.createdAt, "PPP")}
                     </span>
                   </div>
 
