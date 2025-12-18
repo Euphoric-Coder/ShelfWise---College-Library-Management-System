@@ -323,10 +323,10 @@ const PrivacyPolicyPage = () => {
             </p>
             <div className="space-y-2 text-sm">
               <p>
-                <strong>Email:</strong> privacy@ShelfWise.edu
+                <strong>Email:</strong> privacy@Shelf Wise.edu
               </p>
               <p>
-                <strong>Address:</strong> ShelfWise Privacy Office, University
+                <strong>Address:</strong> Shelf Wise Privacy Office, University
                 Campus
               </p>
               <p>

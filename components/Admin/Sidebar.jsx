@@ -65,7 +65,9 @@ const Sidebar = () => {
       <div className="user flex items-center gap-3 p-4">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.ng" />
-          <AvatarFallback className="bg-primary-admin text-white">CN</AvatarFallback>
+          <AvatarFallback className="bg-primary-admin text-white">
+            CN
+          </AvatarFallback>
         </Avatar>
         <div className="flex-1">
           <p className="font-medium text-dark-400">Adrian Hajdin</p>

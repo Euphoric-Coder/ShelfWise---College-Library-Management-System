@@ -36,7 +36,7 @@ export default function SessionWatcher() {
     const remaining = expiryTime - Date.now();
 
     const handleLogout = () => {
-      console.warn("ShelfWise session expired — redirecting...");
+      console.warn("Shelf Wise session expired — redirecting...");
       localStorage.removeItem("shelfwiseExpiry");
       localStorage.setItem("shelfwiseExpired", "true");
       signOut({ redirect: true, callbackUrl: "/sign-in?expired=true" });

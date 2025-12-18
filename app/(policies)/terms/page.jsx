@@ -50,7 +50,7 @@ const TermsOfServicePage = () => {
                     Important Notice
                   </h3>
                   <p className="text-blue-700 text-sm">
-                    By using ShelfWise, you agree to these terms. Please read
+                    By using Shelf Wise, you agree to these terms. Please read
                     them carefully before creating your account.
                   </p>
                 </div>
@@ -73,14 +73,14 @@ const TermsOfServicePage = () => {
             </div>
             <div className="pl-13 space-y-4 text-gray-600 leading-relaxed">
               <p>
-                By accessing and using ShelfWise ("the Service"), you accept and
-                agree to be bound by the terms and provision of this agreement.
-                If you do not agree to abide by the above, please do not use
-                this service.
+                By accessing and using Shelf Wise ("the Service"), you accept
+                and agree to be bound by the terms and provision of this
+                agreement. If you do not agree to abide by the above, please do
+                not use this service.
               </p>
               <p>
                 These Terms of Service constitute a legally binding agreement
-                between you and ShelfWise regarding your use of the Service.
+                between you and Shelf Wise regarding your use of the Service.
               </p>
             </div>
           </section>
@@ -145,8 +145,8 @@ const TermsOfServicePage = () => {
             </div>
             <div className="pl-13 space-y-4 text-gray-600 leading-relaxed">
               <p>
-                ShelfWise provides digital library management services including
-                book borrowing, returns, and catalog browsing.
+                Shelf Wise provides digital library management services
+                including book borrowing, returns, and catalog browsing.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-blue-50 rounded-lg p-4">
@@ -244,11 +244,11 @@ const TermsOfServicePage = () => {
             </p>
             <div className="space-y-2 text-sm">
               <p>
-                <strong>Email:</strong> legal@ShelfWise.edu
+                <strong>Email:</strong> legal@Shelf Wise.edu
               </p>
               <p>
-                <strong>Address:</strong> ShelfWise Legal Department, University
-                Campus
+                <strong>Address:</strong> Shelf Wise Legal Department,
+                University Campus
               </p>
               <p>
                 <strong>Phone:</strong> +1 (555) 123-4567

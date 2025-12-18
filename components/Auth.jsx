@@ -65,7 +65,9 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-semibold text-white">
-        {isSignIn ? "Welcome back to ShelfWise" : "Create your library account"}
+        {isSignIn
+          ? "Welcome back to Shelf Wise"
+          : "Create your library account"}
       </h1>
       <p className="text-light-100">
         {isSignIn
@@ -128,7 +130,7 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
                         required
                         type={FIELD_TYPES[field.name]}
                         {...field}
-                        className="form-input"
+                        className="form-input rounded-3xl"
                       />
                     )}
                   </FormControl>
@@ -145,7 +147,7 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
       </Form>
 
       <p className="text-center text-base font-medium">
-        {isSignIn ? "New to ShelfWise? " : "Already have an account? "}
+        {isSignIn ? "New to Shelf Wise? " : "Already have an account? "}
         <Link
           href={isSignIn ? "/sign-up" : "/sign-in"}
           className="font-bold text-primary"

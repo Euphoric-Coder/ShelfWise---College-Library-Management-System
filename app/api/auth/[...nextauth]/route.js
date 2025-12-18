@@ -65,7 +65,7 @@ const handler = NextAuth({
 
       // Hard-expire JWT
       if (token.realExp && Date.now() / 1000 > token.realExp) {
-        console.warn("ShelfWise JWT expired — session cleared");
+        console.warn("Shelf Wise JWT expired — session cleared");
         return null;
       }
 

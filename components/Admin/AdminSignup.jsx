@@ -106,7 +106,7 @@ const AdminSignup = ({ onSignup }) => {
                 <BookOpen className="size-6 text-white" />
               </div>
               <h1 className="text-2xl font-bold text-primary-admin">
-                ShelfWise
+                Shelf Wise
               </h1>
             </div>
             <h2 className="text-xl font-semibold text-dark-400 mb-1">
@@ -412,7 +412,7 @@ const AdminSignup = ({ onSignup }) => {
                 <BookOpen className="size-8 text-white" />
               </div>
               <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-white/95 bg-clip-text text-transparent">
-                Join ShelfWise
+                Join Shelf Wise
               </h2>
               <p className="text-lg text-white/90 leading-relaxed max-w-md mx-auto">
                 Create your account and unlock access to thousands of books and

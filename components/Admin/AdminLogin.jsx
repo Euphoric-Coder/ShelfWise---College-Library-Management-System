@@ -42,7 +42,7 @@ const AdminLogin = ({ onLogin }) => {
                 <BookOpen className="size-7 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-primary-admin">
-                ShelfWise
+                Shelf Wise
               </h1>
             </div>
             <h2 className="text-2xl font-semibold text-dark-400 mb-2">
@@ -160,7 +160,7 @@ const AdminLogin = ({ onLogin }) => {
           {/* Footer */}
           <div className="text-center mt-8">
             <p className="text-sm text-light-500">
-              © 2024 ShelfWise. All rights reserved.
+              © 2024 Shelf Wise. All rights reserved.
             </p>
           </div>
         </div>
@@ -187,7 +187,7 @@ const AdminLogin = ({ onLogin }) => {
                 <BookOpen className="size-10 text-white" />
               </div>
               <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                ShelfWise Admin
+                Shelf Wise Admin
               </h2>
               <p className="text-xl text-white/90 leading-relaxed max-w-lg mx-auto">
                 Manage your digital library with powerful administrative tools
