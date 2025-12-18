@@ -1,11 +1,15 @@
+"use client";
+
+import RedirectPage from "@/components/Redirect";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-// import { auth } from "@/auth";
-// import { redirect } from "next/navigation";
 
-const Layout = async ({ children }) => {
-  //   const session = await auth();
+const Layout = ({ children }) => {
+  const { data: session } = useSession();
 
-  //   if (session) redirect("/");
+  if (session?.user) {
+    return <RedirectPage />;
+  }
 
   return (
     <main className="auth-container">

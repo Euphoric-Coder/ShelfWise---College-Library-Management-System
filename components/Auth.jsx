@@ -22,7 +22,7 @@ import { file } from "zod";
 import { useEffect, useState } from "react";
 import { signUp } from "@/lib/Authenticate";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Eye, EyeOff } from "lucide-react";
 
 const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   const router = useRouter();
@@ -30,6 +30,8 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
   const isSignIn = type === "SIGN_IN";
 
   const [fileId, setFileId] = useState(null);
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -125,6 +127,28 @@ const Auth = ({ type, schema, defaultValues, onSubmit }) => {
                         setFileId={setFileId}
                         onFileChange={field.onChange}
                       />
+                    ) : field.name === "password" ? (
+                      <div className="relative">
+                        <Input
+                          required
+                          type={passwordVisible ? "text" : "password"}
+                          {...field}
+                          className="form-input rounded-3xl pr-10"
+                        />
+
+                        {/* Toggle Button */}
+                        <button
+                          type="button"
+                          className="absolute inset-y-0 right-3 flex items-center"
+                          onClick={() => setPasswordVisible((prev) => !prev)}
+                        >
+                          {passwordVisible ? (
+                            <EyeOff className="w-5 h-5 text-gray-400" />
+                          ) : (
+                            <Eye className="w-5 h-5 text-gray-400" />
+                          )}
+                        </button>
+                      </div>
                     ) : (
                       <Input
                         required
