@@ -1,5 +1,5 @@
+import { getBookById } from "@/lib/admin/books";
 import { NextResponse } from "next/server";
-import { getBookById } from "@/lib/data";
 
 export async function GET(req, { params }) {
   const book = await getBookById(params.id);
