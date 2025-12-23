@@ -50,7 +50,7 @@ const ViewBook = ({
                 <div className="w-4 h-4 border border-gray-300 rounded flex items-center justify-center">
                   <div className="w-2 h-2 bg-gray-400 rounded-sm"></div>
                 </div>
-                <span>{bookData.dateCreated}</span>
+                <span>{bookData.createdAt}</span>
               </div>
             </div>
 
