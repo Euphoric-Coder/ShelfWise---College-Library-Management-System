@@ -76,81 +76,86 @@ const AllBooksPage = () => {
             </div>
           </div>
 
-          <div className="all-books-table">
-            <div className="all-books-table-header">
-              <div className="all-books-table-row">
-                <div className="all-books-table-cell font-medium text-light-500">
-                  Book Title
-                </div>
-                <div className="all-books-table-cell font-medium text-light-500">
-                  Author
-                </div>
-                <div className="all-books-table-cell font-medium text-light-500">
-                  Genre
-                </div>
-                <div className="all-books-table-cell font-medium text-light-500">
-                  Date Created
-                </div>
-                <div className="all-books-table-cell font-medium text-light-500">
-                  Action
+          <div className="p-5">
+            <div className="all-books-table">
+              <div className="all-books-table-header">
+                <div className="all-books-table-row">
+                  <div className="all-books-table-cell font-medium text-light-500">
+                    Book Title
+                  </div>
+                  <div className="all-books-table-cell font-medium text-light-500">
+                    Author
+                  </div>
+                  <div className="all-books-table-cell font-medium text-light-500">
+                    Genre
+                  </div>
+                  <div className="all-books-table-cell font-medium text-light-500">
+                    Date Created
+                  </div>
+                  <div className="all-books-table-cell font-medium text-light-500">
+                    Action
+                  </div>
+                  <div className="all-books-table-cell font-medium text-light-500">
+                    View
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="all-books-table-body">
-              {books.map((book) => (
-                <div key={book.id} className="all-books-table-row">
-                  <div className="all-books-table-cell">
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={book.coverUrl}
-                        alt={book.title}
-                        className="w-12 h-16 rounded-md object-cover shadow-sm"
-                      />
-                      <span className="font-medium text-dark-400 text-base">
-                        {book.title}
+              <div className="all-books-table-body">
+                {books.map((book) => (
+                  <div key={book.id} className="all-books-table-row">
+                    <div className="all-books-table-cell">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={book.coverUrl}
+                          alt={book.title}
+                          className="w-12 h-16 rounded-md object-cover shadow-sm"
+                        />
+                        <span className="font-medium text-dark-400 text-base">
+                          {book.title}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="all-books-table-cell">
+                      <span className="text-dark-400 text-base">
+                        {book.author}
                       </span>
                     </div>
-                  </div>
 
-                  <div className="all-books-table-cell">
-                    <span className="text-dark-400 text-base">
-                      {book.author}
-                    </span>
-                  </div>
+                    <div className="all-books-table-cell">
+                      <span className="text-dark-400 text-base">
+                        {book.genre}
+                      </span>
+                    </div>
 
-                  <div className="all-books-table-cell">
-                    <span className="text-dark-400 text-base">
-                      {book.genre}
-                    </span>
-                  </div>
+                    <div className="all-books-table-cell">
+                      <span className="text-dark-400 text-base">
+                        {format(book.createdAt, "PPP")}
+                      </span>
+                    </div>
 
-                  <div className="all-books-table-cell">
-                    <span className="text-dark-400 text-base">
-                      {format(book.createdAt, "PPP")}
-                    </span>
-                  </div>
-
-                  <div className="all-books-table-cell">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          router.push(`/admin/all-books/edit-book/${book.id}`)
-                        }
-                        className="all-books-edit-btn"
-                      >
-                        <Edit className="w-4 h-4 text-blue-500" />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteBook(book)}
-                        className="all-books-delete-btn"
-                      >
-                        <Trash2 className="w-4 h-4 text-red-500" />
-                      </button>
+                    <div className="all-books-table-cell">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() =>
+                            router.push(`/admin/all-books/edit-book/${book.id}`)
+                          }
+                          className="all-books-edit-btn"
+                        >
+                          <Edit className="w-4 h-4 text-blue-500" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteBook(book)}
+                          className="all-books-delete-btn"
+                        >
+                          <Trash2 className="w-4 h-4 text-red-500" />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

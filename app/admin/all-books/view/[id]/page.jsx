@@ -1,9 +1,14 @@
-import React from 'react'
+"use client";
+
+import { useParams } from "next/navigation";
+import React from "react";
 
 const page = () => {
-  return (
-    <div>View Book</div>
-  )
-}
+  const { id } = useParams();
+  
+  console.log("Book ID:", id);
 
-export default page
+  return <div>View Book</div>;
+};
+
+export default page;
