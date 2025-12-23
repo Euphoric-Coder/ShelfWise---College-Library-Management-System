@@ -185,18 +185,18 @@ const AllBooksPage = () => {
                   key={book.id}
                   className="rounded-2xl overflow-hidden shadow-md border border-gray-200"
                 >
-                  <div className="bg-blue-50 px-4 py-3 flex justify-center border-b border-gray-200">
+                  {/* Header */}
+                  <CardHeader className="relative bg-gradient-to-r from-light-300 via-white to-light-200 p-4">
                     <button
-                      onClick={() => router.push(`/books/${book.id}`)}
-                      className="px-4 py-2 text-sm font-semibold rounded-full 
-                     bg-blue-600 text-white hover:bg-blue-700
-                     transition-all shadow-sm"
+                      onClick={() => router.push(`/admin/all-books/view/${book.id}`)}
+                      className="absolute top-3 right-3 px-3 py-1.5 
+                     text-xs font-semibold rounded-full
+                     bg-blue-600 text-white shadow-sm
+                     hover:bg-blue-700 transition"
                     >
-                      View Book
+                      View
                     </button>
-                  </div>
-                  {/* Gradient Header */}
-                  <CardHeader className="bg-gradient-to-r from-light-300 via-white to-light-200 p-4">
+
                     <div className="flex items-center gap-4">
                       <img
                         src={book.coverUrl}
