@@ -1,8 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Edit, Trash2, Plus, AlertTriangle, X } from "lucide-react";
+import { Edit, Trash2, Plus, AlertTriangle, X, Eye, ExternalLink, CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { format } from "date-fns";
 
 const AllBooksPage = () => {
@@ -77,7 +86,7 @@ const AllBooksPage = () => {
           </div>
 
           <div className="p-5">
-            <div className="all-books-table">
+            <div className="all-books-table hidden 2xl:block">
               <div className="all-books-table-header">
                 <div className="all-books-table-row">
                   <div className="all-books-table-cell font-medium text-light-500">
@@ -96,7 +105,7 @@ const AllBooksPage = () => {
                     Action
                   </div>
                   <div className="all-books-table-cell font-medium text-light-500">
-                    View
+                    Available Copies
                   </div>
                 </div>
               </div>
@@ -139,6 +148,14 @@ const AllBooksPage = () => {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() =>
+                            router.push(`/admin/all-books/view/${book.id}`)
+                          }
+                          className="all-books-edit-btn"
+                        >
+                          <Eye className="w-4 h-4 text-blue-500" />
+                        </button>
+                        <button
+                          onClick={() =>
                             router.push(`/admin/all-books/edit-book/${book.id}`)
                           }
                           className="all-books-edit-btn"
@@ -153,9 +170,99 @@ const AllBooksPage = () => {
                         </button>
                       </div>
                     </div>
+
+                    <div>
+                      {book.availableCopies ?? 0} out of {book.totalCopies}
+                    </div>
                   </div>
                 ))}
               </div>
+            </div>
+            {/* 📱 Mobile Books Card Layout */}
+            <div className="space-y-5 xl:hidden">
+              {books.map((book) => (
+                <Card
+                  key={book.id}
+                  className="rounded-2xl overflow-hidden shadow-md border border-gray-200"
+                >
+                  <div className="bg-blue-50 px-4 py-3 flex justify-center border-b border-gray-200">
+                    <button
+                      onClick={() => router.push(`/books/${book.id}`)}
+                      className="px-4 py-2 text-sm font-semibold rounded-full 
+                     bg-blue-600 text-white hover:bg-blue-700
+                     transition-all shadow-sm"
+                    >
+                      View Book
+                    </button>
+                  </div>
+                  {/* Gradient Header */}
+                  <CardHeader className="bg-gradient-to-r from-light-300 via-white to-light-200 p-4">
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={book.coverUrl}
+                        alt={book.title}
+                        className="w-14 h-20 rounded-lg object-cover shadow"
+                      />
+
+                      <div>
+                        <CardTitle className="text-base font-bold text-dark-400 line-clamp-2">
+                          {book.title}
+                        </CardTitle>
+                        <p className="text-sm text-light-500">{book.author}</p>
+                      </div>
+                    </div>
+                  </CardHeader>
+
+                  {/* Details */}
+                  <CardContent className="bg-white p-4 space-y-3 text-sm">
+                    <p>
+                      <span className="font-semibold text-dark-400">
+                        Genre:
+                      </span>{" "}
+                      {book.genre}
+                    </p>
+
+                    <p>
+                      <span className="font-semibold text-dark-400">
+                        Date Added:
+                      </span>{" "}
+                      {format(book.createdAt, "PPP")}
+                    </p>
+
+                    <p>
+                      <span className="font-semibold text-dark-400">
+                        Available Copies:
+                      </span>{" "}
+                      {book.availableCopies ?? 0} out of {book.totalCopies}
+                    </p>
+                  </CardContent>
+
+                  {/* Action Buttons */}
+                  <CardFooter className="flex justify-end gap-2 bg-gray-50 px-4 py-3 border-t">
+                    <div className="flex w-full items-center gap-2 justify-center">
+                      {/* Edit Book */}
+                      <button
+                        onClick={() =>
+                          router.push(`/admin/all-books/edit-book/${book.id}`)
+                        }
+                        className="px-3 w-full py-2 text-sm rounded-3xl font-semibold text-blue-700 bg-blue-200 hover:bg-blue-300 transition-colors"
+                      >
+                        <Edit className="w-4 h-4 inline-block mr-1" />
+                        Edit Book
+                      </button>
+
+                      {/* Delete Book */}
+                      <button
+                        onClick={() => handleDeleteBook(book)}
+                        className="px-3 w-full py-2 text-sm rounded-3xl font-semibold text-red-700 bg-red-200 hover:bg-red-300 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4 inline-block mr-1" />
+                        Delete
+                      </button>
+                    </div>
+                  </CardFooter>
+                </Card>
+              ))}
             </div>
           </div>
         </div>

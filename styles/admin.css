@@ -404,11 +404,11 @@
   }
 
   .all-books-table-row {
-    @apply grid grid-cols-6 gap-6 rounded-full items-center;
+    @apply grid grid-cols-6 gap-12 items-center;
   }
 
   .all-books-table-body .all-books-table-row {
-    @apply px-4 sm:px-6 py-3 sm:py-4 hover:bg-light-300/70 transition-colors duration-200;
+    @apply px-4 sm:px-6 py-3 sm:py-4 hover:bg-light-300/70 hover:rounded-3xl transition-colors duration-200;
   }
 
   .all-books-table-cell {
