@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   ArrowLeft,
-  CreditCard as Edit,
   PenBox,
   Play,
   Trash2,

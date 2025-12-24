@@ -1,18 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, X } from "lucide-react";
+import { ArrowLeft, Folder, X } from "lucide-react";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 const EditBookPage = ({ bookData }) => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: bookData.title,
     author: bookData.author,
     genre: bookData.genre,
-    totalBooks: bookData.totalBooks,
-    primaryColor: bookData.primaryColor,
+    rating: bookData.rating,
+    totalCopies: bookData.totalCopies,
+    availableCopies: bookData.availableCopies,
+    coverColor: bookData.coverColor,
     summary: bookData.summary,
-    imageFile: "jayne-castle.png",
-    videoFile: "jayne-castle-intro.mp4",
+    coverUrl: bookData.coverUrl,
+    videoFile: bookData.videoUrl,
   });
 
   const handleInputChange = (e) => {
@@ -32,21 +37,22 @@ const EditBookPage = ({ bookData }) => {
   const removeFile = (fileType) => {
     setFormData((prev) => ({
       ...prev,
-      [fileType === "image" ? "imageFile" : "videoFile"]: "",
+      [fileType === "image" ? "coverUrl" : "videoFile"]: "",
     }));
   };
 
   return (
     <div className="w-full space-y-6">
-      <button
+      <Button
+        variant="secondary"
         onClick={() => {
-          window.history.back();
+          router.push("/admin/all-books");
         }}
-        className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-8 transition-colors"
+        className="flex items-center gap-2 mb-8 border-2 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Go back
-      </button>
+      </Button>
 
       <form onSubmit={handleSubmit} className="w-full space-y-6">
         <div className="form-group">
@@ -86,8 +92,8 @@ const EditBookPage = ({ bookData }) => {
           <label className="form-label">Total number of books</label>
           <input
             type="number"
-            name="totalBooks"
-            value={formData.totalBooks}
+            name="totalCopies"
+            value={formData.totalCopies}
             onChange={handleInputChange}
             className="admin-form-input"
           />
@@ -96,11 +102,11 @@ const EditBookPage = ({ bookData }) => {
         <div className="form-group">
           <label className="form-label">Book Image</label>
           <div className="upload-area-with-file">
-            {formData.imageFile ? (
+            {formData.coverUrl ? (
               <div className="uploaded-file">
                 <div className="file-info">
-                  <div className="file-icon">📁</div>
-                  <span className="file-name">{formData.imageFile}</span>
+                  <div className="file-icon"><Folder /></div>
+                  <span className="file-name">{formData.coverUrl}</span>
                 </div>
                 <button
                   type="button"
@@ -123,12 +129,12 @@ const EditBookPage = ({ bookData }) => {
           <div className="color-picker-container">
             <div
               className="color-preview"
-              style={{ backgroundColor: formData.primaryColor }}
+              style={{ backgroundColor: formData.coverColor }}
             ></div>
             <input
               type="text"
-              name="primaryColor"
-              value={formData.primaryColor}
+              name="coverColor"
+              value={formData.coverColor}
               onChange={handleInputChange}
               className="color-input"
             />

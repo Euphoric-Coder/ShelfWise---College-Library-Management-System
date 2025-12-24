@@ -517,11 +517,11 @@
 }
 
 .admin-form-input {
-  @apply w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+  @apply w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-3xl text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200;
 }
 
 .form-textarea {
-  @apply w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none;
+  @apply w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-3xl text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-admin focus:border-transparent transition-all duration-200 resize-none;
 }
 
 .upload-area {
