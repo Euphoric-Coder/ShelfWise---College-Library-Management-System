@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Edit, Trash2, Plus, AlertTriangle, X, Eye, ExternalLink, CheckCircle } from "lucide-react";
+import {
+  Edit,
+  Trash2,
+  Plus,
+  AlertTriangle,
+  X,
+  Eye,
+  ExternalLink,
+  CheckCircle,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   Card,
@@ -102,10 +111,10 @@ const AllBooksPage = () => {
                     Date Created
                   </div>
                   <div className="all-books-table-cell font-medium text-light-500">
-                    Action
+                    Available Copies
                   </div>
                   <div className="all-books-table-cell font-medium text-light-500">
-                    Available Copies
+                    Action
                   </div>
                 </div>
               </div>
@@ -144,6 +153,10 @@ const AllBooksPage = () => {
                       </span>
                     </div>
 
+                    <div>
+                      {book.availableCopies ?? 0} out of {book.totalCopies}
+                    </div>
+
                     <div className="all-books-table-cell">
                       <div className="flex items-center gap-2">
                         <button
@@ -170,15 +183,12 @@ const AllBooksPage = () => {
                         </button>
                       </div>
                     </div>
-
-                    <div>
-                      {book.availableCopies ?? 0} out of {book.totalCopies}
-                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            {/* 📱 Mobile Books Card Layout */}
+
+            {/* Mobile & Tablet Card */}
             <div className="space-y-5 xl:hidden">
               {books.map((book) => (
                 <Card
@@ -188,7 +198,9 @@ const AllBooksPage = () => {
                   {/* Header */}
                   <CardHeader className="relative bg-gradient-to-r from-light-300 via-white to-light-200 p-4">
                     <button
-                      onClick={() => router.push(`/admin/all-books/view/${book.id}`)}
+                      onClick={() =>
+                        router.push(`/admin/all-books/view/${book.id}`)
+                      }
                       className="absolute top-3 right-3 px-3 py-1.5 
                      text-xs font-semibold rounded-full
                      bg-blue-600 text-white shadow-sm
