@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, Folder, X } from "lucide-react";
+import { ArrowLeft, Folder, PenBox, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
@@ -48,7 +48,7 @@ const EditBookPage = ({ bookData }) => {
         onClick={() => {
           router.push("/admin/all-books");
         }}
-        className="flex items-center gap-2 mb-8 border-2 transition-colors"
+        className="flex items-center gap-2 mb-8 border-2 transition-colors rounded-3xl"
       >
         <ArrowLeft className="w-4 h-4" />
         Go back
@@ -105,7 +105,9 @@ const EditBookPage = ({ bookData }) => {
             {formData.coverUrl ? (
               <div className="uploaded-file">
                 <div className="file-info">
-                  <div className="file-icon"><Folder /></div>
+                  <div className="file-icon">
+                    <Folder />
+                  </div>
                   <span className="file-name">{formData.coverUrl}</span>
                 </div>
                 <button
@@ -178,6 +180,7 @@ const EditBookPage = ({ bookData }) => {
         </div>
 
         <button type="submit" className="submit-button">
+          <PenBox />
           Update Book
         </button>
       </form>

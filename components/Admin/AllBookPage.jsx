@@ -86,7 +86,7 @@ const AllBooksPage = () => {
               </div>
               <button
                 onClick={() => router.push("/admin/all-books/add-book")}
-                className="all-books-create-btn"
+                className="all-books-create-btn rounded-3xl"
               >
                 <Plus className="w-4 h-4" />
                 Create a New Book

@@ -40,7 +40,7 @@ const ViewBook = ({ onGoBack, bookData }) => {
         <Button
           variant="secondary"
           onClick={onGoBack}
-          className="flex items-center gap-2 mb-8 transition-colors border-2"
+          className="flex items-center gap-2 mb-8 transition-colors border-2 rounded-3xl"
         >
           <ArrowLeft className="w-4 h-4" />
           Go back

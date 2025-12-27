@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, Upload } from "lucide-react";
+import { ArrowLeft, CirclePlus, Upload } from "lucide-react";
+import { Button } from "../ui/button";
 
 const CreateBookPage = () => {
   const [formData, setFormData] = useState({
@@ -29,15 +30,16 @@ const CreateBookPage = () => {
 
   return (
     <div className="w-full space-y-6">
-      <button
+      <Button
+      variant="secondary"
         onClick={() => {
             window.history.back();
         }}
-        className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-8 transition-colors"
+        className="flex items-center gap-2 mb-8 border-2 transition-colors rounded-3xl"
       >
         <ArrowLeft className="w-4 h-4" />
         Go back
-      </button>
+      </Button>
 
       <form onSubmit={handleSubmit} className="w-full space-y-6">
         <div className="form-group">
@@ -135,7 +137,8 @@ const CreateBookPage = () => {
         </div>
 
         <button type="submit" className="submit-button">
-          Update Book
+          <CirclePlus />
+          Add Book
         </button>
       </form>
     </div>
