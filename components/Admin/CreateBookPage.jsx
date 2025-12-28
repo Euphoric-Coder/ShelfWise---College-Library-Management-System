@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ArrowLeft, CirclePlus, Upload } from "lucide-react";
 import { Button } from "../ui/button";
+import AdminUpload from "./AdminUpload";
 
 const CreateBookPage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,12 @@ const CreateBookPage = () => {
     primaryColor: "#ffffff",
     summary: "",
   });
+
+  const [imageId, setImageId] = useState(null);
+
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,9 +38,9 @@ const CreateBookPage = () => {
   return (
     <div className="w-full space-y-6">
       <Button
-      variant="secondary"
+        variant="secondary"
         onClick={() => {
-            window.history.back();
+          window.history.back();
         }}
         className="flex items-center gap-2 mb-8 border-2 transition-colors rounded-3xl"
       >
@@ -93,8 +100,15 @@ const CreateBookPage = () => {
         <div className="form-group">
           <label className="form-label">Book Image</label>
           <div className="upload-area">
-            <Upload className="w-5 h-5 text-gray-400" />
-            <span className="text-gray-500">Upload an image</span>
+            <AdminUpload
+              type="image"
+              accept="image/*"
+              placeholder="Upload your ID"
+              folder="ids"
+              variant="light"
+              setFileId={setImageId}
+              onFileChange={setImage}
+            />
           </div>
         </div>
 

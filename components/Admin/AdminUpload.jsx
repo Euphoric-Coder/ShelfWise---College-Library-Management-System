@@ -51,7 +51,7 @@ const AdminUpload = ({
     button:
       variant === "dark"
         ? "bg-dark-300 rounded-3xl"
-        : "bg-light-600 border-gray-100 border",
+        : "bg-light-600 border-gray-100 border rounded-3xl",
     placeholder: variant === "dark" ? "text-light-100" : "text-slate-500",
     text: variant === "dark" ? "text-light-100" : "text-dark-400",
   };
