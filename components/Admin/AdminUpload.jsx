@@ -2,7 +2,7 @@
 
 import { IKImage, ImageKitProvider, IKUpload, IKVideo } from "imagekitio-next";
 import config from "@/lib/config";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -41,11 +41,19 @@ const AdminUpload = ({
   variant,
   onFileChange,
   setFileId,
+  defaultFile,
 }) => {
   const ikUploadRef = useRef(null);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(defaultFile || null);
   const [progress, setProgress] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // When defaultFile changes (hydration), restore file state
+  useEffect(() => {
+    if (defaultFile) {
+      setFile(defaultFile);
+    }
+  }, [defaultFile]);
 
   const styles = {
     button:

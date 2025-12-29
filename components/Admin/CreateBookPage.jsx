@@ -1,25 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowLeft, CirclePlus, Upload } from "lucide-react";
 import { Button } from "../ui/button";
 import AdminUpload from "./AdminUpload";
+import { desc } from "drizzle-orm";
 
 const CreateBookPage = () => {
+  // Local Storage Key
+  const STORAGE_KEY = "createBookForm";
+
   const [formData, setFormData] = useState({
     title: "",
     author: "",
     genre: "",
-    totalBooks: "",
-    primaryColor: "#ffffff",
+    rating: "",
+    coverUrl: "",
+    coverUrlId: "",
+    coverColor: "#ffffff",
+    description: "",
+    totalCopies: "",
+    availableCopies: "",
+    videoUrl: "",
+    videoUrlId: "",
     summary: "",
   });
 
-  const [imageId, setImageId] = useState(null);
-
   const [image, setImage] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [video, setVideo] = useState(null);
+
+  // Fetch saved data from local storage on component mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+
+      setFormData(data);
+
+      // Restore image preview
+      if (data.coverUrl && data.coverUrlId) {
+        setImage({
+          url: data.coverUrl,
+          fileId: data.coverUrlId,
+          filePath: data.coverUrl.split("/").slice(-1)[0], // fileName.ext
+          resourceType: "image",
+        });
+      }
+
+      // Restore video preview
+      if (data.videoUrl && data.videoUrlId) {
+        setVideo({
+          url: data.videoUrl,
+          fileId: data.videoUrlId,
+          filePath: data.videoUrl.split("/").slice(-1)[0],
+          resourceType: "video",
+        });
+      }
+    }
+  }, []);
+
+  // Save form data to local storage on change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  }, [formData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +76,9 @@ const CreateBookPage = () => {
     e.preventDefault();
     // Handle form submission
     console.log("Form submitted:", formData);
+
+    // Clear LocalStorage after success
+    localStorage.removeItem(STORAGE_KEY);
   };
 
   return (
@@ -86,13 +132,40 @@ const CreateBookPage = () => {
         </div>
 
         <div className="form-group">
+          <label className="form-label">Rating (1-5)</label>
+          <input
+            type="number"
+            name="rating"
+            value={formData.rating}
+            onChange={handleInputChange}
+            min={1}
+            max={5}
+            placeholder="Enter the rating of the book"
+            className="admin-form-input"
+          />
+        </div>
+
+        <div className="form-group">
           <label className="form-label">Total number of books</label>
           <input
             type="number"
-            name="totalBooks"
-            value={formData.totalBooks}
+            name="totalCopies"
+            value={formData.totalCopies}
             onChange={handleInputChange}
             placeholder="Enter the total number of books"
+            className="admin-form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Total number of books available</label>
+          <input
+            type="number"
+            name="availableCopies"
+            value={formData.totalCopies}
+            onChange={handleInputChange}
+            placeholder="Enter the total number of books"
+            disabled
             className="admin-form-input"
           />
         </div>
@@ -106,8 +179,13 @@ const CreateBookPage = () => {
               placeholder="Upload your ID"
               folder="ids"
               variant="light"
-              setFileId={setImageId}
-              onFileChange={setImage}
+              setFileId={(id) =>
+                setFormData((prev) => ({ ...prev, coverUrlId: id }))
+              }
+              onFileChange={(url) =>
+                setFormData((prev) => ({ ...prev, coverUrl: url }))
+              }
+              defaultFile={image}
             />
           </div>
         </div>
@@ -117,25 +195,48 @@ const CreateBookPage = () => {
           <div className="color-picker-container">
             <div
               className="color-preview"
-              style={{ backgroundColor: formData.primaryColor }}
+              style={{ backgroundColor: formData.coverColor }}
             ></div>
             <input
               type="text"
-              name="primaryColor"
-              value={formData.primaryColor}
+              name="coverColor"
+              value={formData.coverColor}
               onChange={handleInputChange}
               className="color-input"
-              readOnly
             />
           </div>
         </div>
 
+        {/* Video Upload */}
         <div className="form-group">
-          <label className="form-label">Book Video</label>
-          <div className="upload-area">
-            <Upload className="w-5 h-5 text-gray-400" />
-            <span className="text-gray-500">Upload a video</span>
-          </div>
+          <label className="form-label">Book Trailer Video</label>
+
+          <AdminUpload
+            type="video"
+            accept="video/*"
+            placeholder="Upload Trailer"
+            folder="books/videos"
+            variant="light"
+            setFileId={(id) =>
+              setFormData((prev) => ({ ...prev, videoUrlId: id }))
+            }
+            onFileChange={(url) =>
+              setFormData((prev) => ({ ...prev, videoUrl: url }))
+            }
+            defaultFile={video}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Book Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Write a short description of the book"
+            className="form-textarea"
+            rows={4}
+          />
         </div>
 
         <div className="form-group">
