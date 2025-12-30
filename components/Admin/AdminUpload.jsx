@@ -181,21 +181,23 @@ const AdminUpload = ({
         </div>
       )}
 
-      {file &&
-        (type === "image" ? (
-          <IKImage
-            alt={file.filePath}
-            path={file.filePath}
-            width={500}
-            height={300}
-          />
-        ) : type === "video" ? (
-          <IKVideo
-            path={file.filePath}
-            controls={true}
-            className="h-96 w-full rounded-xl"
-          />
-        ) : null)}
+      {/* SIMPLE IMAGE PREVIEW */}
+      {file && type === "image" && (
+        <img
+          src={file.url}
+          alt="Preview"
+          className="w-full size-[50vh] rounded-3xl mt-3"
+        />
+      )}
+
+      {/* SIMPLE VIDEO PREVIEW */}
+      {file && type === "video" && (
+        <video
+          src={file.url}
+          controls
+          className="w-full h-64 rounded-xl mt-3"
+        />
+      )}
     </ImageKitProvider>
   );
 };
