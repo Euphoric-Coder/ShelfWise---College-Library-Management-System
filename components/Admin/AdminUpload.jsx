@@ -48,6 +48,8 @@ const AdminUpload = ({
   const [progress, setProgress] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  console.log("Default file:", defaultFile);
+
   // When defaultFile changes (hydration), restore file state
   useEffect(() => {
     if (defaultFile) {
@@ -192,9 +194,9 @@ const AdminUpload = ({
 
       {/* SIMPLE VIDEO PREVIEW */}
       {file && type === "video" && (
-        <video
-          src={file.url}
-          controls
+        <IKVideo
+          path={file.filePath}
+          controls={true}
           className="w-full h-64 rounded-xl mt-3"
         />
       )}

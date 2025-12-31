@@ -10,7 +10,14 @@ const BookList = ({ title, books, containerClassName }) => {
 
       <ul className="book-list">
         {books.map((book) => (
-          <BookCard key={book.title} id={book.id} title={book.title} genre={book.genre} coverColor={book.color} coverUrl={book.cover} />
+          <BookCard
+            key={book.title}
+            id={book.id}
+            title={book.title}
+            genre={book.genre}
+            coverColor={book.coverColor}
+            coverUrl={book.coverUrl}
+          />
         ))}
       </ul>
     </section>

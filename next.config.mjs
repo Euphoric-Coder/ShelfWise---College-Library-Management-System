@@ -12,6 +12,14 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "rukminim2.flixcart.com",
+      },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
+      {
+        protocol: "https",
         hostname: "ik.imagekit.io",
         port: "",
       },
