@@ -95,7 +95,7 @@ const AllBooksPage = () => {
           </div>
 
           <div className="p-5">
-            <div className="all-books-table hidden 2xl:block">
+            <div className="all-books-table mb-10 hidden 2xl:block">
               <div className="all-books-table-header">
                 <div className="all-books-table-row">
                   <div className="all-books-table-cell font-medium text-light-500">
@@ -189,7 +189,7 @@ const AllBooksPage = () => {
             </div>
 
             {/* Mobile & Tablet Card */}
-            <div className="space-y-5 xl:hidden">
+            <div className="space-y-5 2xl:hidden">
               {books.map((book) => (
                 <Card
                   key={book.id}
