@@ -7,8 +7,7 @@ import { cn } from "@/lib/utils";
 import BookCoverSVG from "./BookCoverSVG";
 import Image from "next/image";
 
-
-const variantStyles= {
+const variantStyles = {
   extraSmall: "book-cover_extra_small",
   small: "book-cover_small",
   medium: "book-cover_medium",
@@ -27,7 +26,7 @@ const BookCover = ({
       className={cn(
         "relative transition-all duration-300",
         variantStyles[variant],
-        className
+        className,
       )}
     >
       <BookCoverSVG coverColor={coverColor} />
@@ -36,7 +35,12 @@ const BookCover = ({
         className="absolute z-10"
         style={{ left: "12%", width: "87.5%", height: "88%" }}
       >
-        <Image src={coverImage} alt="Book cover" fill className="rounded-sm object-fill"/>
+        <Image
+          src={coverImage}
+          alt="Book cover"
+          fill
+          className="rounded-sm object-fill"
+        />
         {/* <IKImage
           path={coverImage}
           urlEndpoint={config.env.imagekit.urlEndpoint}
