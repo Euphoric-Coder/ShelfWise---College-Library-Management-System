@@ -1,12 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, Edit, Play, ChevronDown, Check } from "lucide-react";
+import {
+  ArrowLeft,
+  Edit,
+  Play,
+  ChevronDown,
+  Check,
+  FileText,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const BorrowRequestsPage = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [statusDropdown, setStatusDropdown] = useState(null);
-
   const borrowRequests = [
     {
       id: "1",
@@ -29,6 +41,7 @@ const BorrowRequestsPage = () => {
       createdAt: "12/01/24",
       summary:
         "People in Glass Houses by Jayne Castle (a pseudonym for Jayne Ann Krentz) is a science fiction romance set in a future world where people with psychic abilities live in harmony with advanced technology. The story follows the main characters, Harriet and Sam, who are drawn together under unusual circumstances.",
+      receiptGenerated: false,
     },
     {
       id: "2",
@@ -51,6 +64,7 @@ const BorrowRequestsPage = () => {
       createdAt: "12/01/24",
       summary:
         "People in Glass Houses by Jayne Castle (a pseudonym for Jayne Ann Krentz) is a science fiction romance set in a future world where people with psychic abilities live in harmony with advanced technology.",
+      receiptGenerated: false,
     },
     {
       id: "3",
@@ -73,6 +87,8 @@ const BorrowRequestsPage = () => {
       createdAt: "12/01/24",
       summary:
         "People in Glass Houses by Jayne Castle (a pseudonym for Jayne Ann Krentz) is a science fiction romance set in a future world where people with psychic abilities live in harmony with advanced technology. The story follows the main characters, Harriet and Sam, who are drawn together under unusual circumstances.",
+
+      receiptGenerated: false,
     },
     {
       id: "4",
@@ -95,8 +111,11 @@ const BorrowRequestsPage = () => {
       createdAt: "12/01/24",
       summary:
         "People in Glass Houses by Jayne Castle (a pseudonym for Jayne Ann Krentz) is a science fiction romance set in a future world where people with psychic abilities live in harmony with advanced technology.",
+      receiptGenerated: false,
     },
   ];
+
+  const [requests, setRequests] = useState(borrowRequests);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -116,8 +135,17 @@ const BorrowRequestsPage = () => {
   };
 
   const handleStatusChange = (requestId, newStatus) => {
-    // Handle status change logic here
-    setStatusDropdown(null);
+    setRequests((prev) =>
+      prev.map((r) => (r.id === requestId ? { ...r, status: newStatus } : r)),
+    );
+  };
+
+  const handleGenerateReceipt = (requestId) => {
+    setRequests((prev) =>
+      prev.map((req) =>
+        req.id === requestId ? { ...req, receiptGenerated: true } : req,
+      ),
+    );
   };
 
   if (selectedBook) {
@@ -254,7 +282,7 @@ const BorrowRequestsPage = () => {
         </div>
 
         <div className="divide-y divide-gray-100">
-          {borrowRequests.map((request) => (
+          {requests.map((request) => (
             <div
               key={request.id}
               className="grid grid-cols-7 gap-4 items-center px-6 py-4 hover:bg-gray-50/50 transition-colors duration-200"
@@ -293,59 +321,75 @@ const BorrowRequestsPage = () => {
                 </div>
               </div>
 
-              <div className="text-sm">
-                <div className="relative">
-                  <button
-                    onClick={() =>
-                      setStatusDropdown(
-                        statusDropdown === request.id ? null : request.id
-                      )
-                    }
-                    className={`font-medium ${getStatusColor(
-                      request.status
-                    )} hover:opacity-80 transition-opacity text-base`}
-                  >
-                    {request.status}
-                  </button>
+              <div className="flex items-center">
+                <DropdownMenu>
+                  {/* Status Pill Trigger */}
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200
+        ${
+          request.status === "Borrowed"
+            ? "bg-indigo-100 text-indigo-600 border-indigo-600 border-2"
+            : request.status === "Returned"
+              ? "bg-sky-100 text-sky-600 border-sky-600 border-2"
+              : "bg-rose-100 text-rose-600 border-rose-600 border-2"
+        }`}
+                    >
+                      {request.status}
+                      <ChevronDown className="w-3 h-3 opacity-70" />
+                    </button>
+                  </DropdownMenuTrigger>
 
-                  {statusDropdown === request.id && (
-                    <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[120px] py-1">
-                      <button
-                        onClick={() =>
-                          handleStatusChange(request.id, "Borrowed")
-                        }
-                        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 flex items-center justify-between transition-colors text-blue-600"
-                      >
-                        <span>Borrowed</span>
-                        {request.status === "Borrowed" && (
-                          <Check className="w-4 h-4" />
-                        )}
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleStatusChange(request.id, "Returned")
-                        }
-                        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 flex items-center justify-between transition-colors text-green-600"
-                      >
-                        <span>Returned</span>
-                        {request.status === "Returned" && (
-                          <Check className="w-4 h-4" />
-                        )}
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleStatusChange(request.id, "Late Return")
-                        }
-                        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 flex items-center justify-between transition-colors text-red-600"
-                      >
-                        <span>Late Return</span>
-                        {request.status === "Late Return" && (
-                          <Check className="w-4 h-4" />
-                        )}
-                      </button>
-                    </div>
-                  )}
-                </div>
+                  {/* Dropdown Card */}
+                  <DropdownMenuContent
+                    align="start"
+                    className="w-[170px] p-3 rounded-xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 space-y-1"
+                  >
+                    {/* Borrowed */}
+                    <DropdownMenuItem
+                      onClick={() => handleStatusChange(request.id, "Borrowed")}
+                      className="flex items-center justify-between px-2 py-2 rounded-lg cursor-pointer transition-all hover:bg-gray-100"
+                    >
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-600">
+                        Borrowed
+                      </span>
+
+                      {request.status === "Borrowed" && (
+                        <Check className="w-4 h-4 text-indigo-600" />
+                      )}
+                    </DropdownMenuItem>
+
+                    {/* Returned */}
+                    <DropdownMenuItem
+                      onClick={() => handleStatusChange(request.id, "Returned")}
+                      className="flex items-center justify-between px-2 py-2 rounded-lg cursor-pointer transition-all hover:bg-gray-100"
+                    >
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-600">
+                        Returned
+                      </span>
+
+                      {request.status === "Returned" && (
+                        <Check className="w-4 h-4 text-sky-600" />
+                      )}
+                    </DropdownMenuItem>
+
+                    {/* Late Return */}
+                    <DropdownMenuItem
+                      onClick={() =>
+                        handleStatusChange(request.id, "Late Return")
+                      }
+                      className="flex items-center justify-between px-2 py-2 rounded-lg cursor-pointer transition-all hover:bg-gray-100"
+                    >
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-600">
+                        Late Return
+                      </span>
+
+                      {request.status === "Late Return" && (
+                        <Check className="w-4 h-4 text-rose-600" />
+                      )}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
 
               <div className="text-sm">
@@ -366,13 +410,37 @@ const BorrowRequestsPage = () => {
                 </span>
               </div>
 
-              <div className="text-sm">
-                <button className="text-blue-600 hover:text-blue-700 font-medium transition-colors text-base flex items-center gap-2">
-                  <div className="w-4 h-4 border border-blue-600 rounded flex items-center justify-center">
-                    <div className="w-2 h-2 bg-blue-600 rounded-sm"></div>
-                  </div>
-                  Generate
-                </button>
+              <div className="text-sm flex items-center">
+                {request.status === "Borrowed" && !request.receiptGenerated ? (
+                  <button
+                    onClick={() => handleGenerateReceipt(request.id)}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl
+      bg-violet-50 text-violet-600 border border-violet-200
+      hover:bg-violet-100 transition-colors font-medium text-sm"
+                  >
+                    <FileText className="w-4 h-4 text-violet-600" />
+                    Generate
+                  </button>
+                ) : request.receiptGenerated ? (
+                  <span
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-md
+      bg-violet-50 text-violet-600 border border-violet-200
+      font-medium text-sm"
+                  >
+                    <Check className="w-4 h-4 text-violet-600" />
+                    Generated
+                  </span>
+                ) : (
+                  <button
+                    disabled
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-md
+      bg-gray-100 text-gray-400 border border-gray-200
+      cursor-not-allowed font-medium text-sm"
+                  >
+                    <FileText className="w-4 h-4 text-gray-400" />
+                    Generate
+                  </button>
+                )}
               </div>
             </div>
           ))}
